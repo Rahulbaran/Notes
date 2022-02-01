@@ -1,0 +1,2 @@
+-   To get files sent by JavaScript as **FormData()** we have to use `files` property of `flask.request`.
+-   To get any other data from **FormData()**, We have to use `form` property of `flask.request`.

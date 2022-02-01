@@ -178,3 +178,22 @@ Note:- **DOMString** behaves similar to JavaScript **String**.
 -   In the event of a communication error (such as the server going down), an exception will be thrown in the **onreadystatechange** method when accessing the response status. To mitigate this, we can wrap it inside `try...catch`.
 
 -   When using **FormData** to submit POST requests using **XMLHttpRequest** or the **Fetch_API** with the `multipart/form-data` Content-Type (e.g. when uploading Files and Blobs to the server), _do not explicitly set the Content-Type header on the request_. Doing so will prevent the browser from being able to set the Content-Type header with the boundary expression it will use to delimit form fields in the request body.
+
+-   For a form to **accept files** we have to mention _encodiing type(enctype)_ to `multipart/form-data`
+
+-   To send any file to server using **FormData**, we have to use **files property** on _input file field_ to access all the uploaded files which returns an array of all the files uploaded then we append those files in **formData**.
+
+```bash
+const formData = new FormData();
+const fileField = document.querySelector("input[type='file']");
+
+/*==== If there is only one file ====*/
+const file = fileField.files[0];
+formData.append(fileField.name, file);
+
+/*==== If there is multiple files ====*/
+const files = fileField.files;
+for(let i = 0;i < files.length;i++) {
+    formData.append(`image-${i}`,files[i]);
+};
+```
