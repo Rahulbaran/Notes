@@ -25,7 +25,6 @@
         display:flex;
         justify-content:$just;
         align-items:$align;
-
   ```
 
 - **CSS** automatically recovers from **most invalid syntaxes** raised in the stylesheet whereas **Sass** fails parsing & raises error with specifying the location of invalid syntax & cause of error.
@@ -90,7 +89,7 @@
 - Nesting of selectors should be **shallow** to avoid complexity in visualizing and save bandwidth required to parse it to **CSS**.
 
 ```bash
-/*-------------- SCSS -------------*/
+/*-------------- SASS -------------*/
 section {
    background-color: red;
    p {
@@ -110,7 +109,7 @@ section p {
 - We can handle Selector lists of complex selectors through by nesting them.
 
 ```bash
-/*--------------- SCSS ---------------*/
+/*--------------- SASS ---------------*/
 .header, .footer {
    span, h3 {
       font-family: 'Roboto',sans-serif;
@@ -127,19 +126,17 @@ section p {
 - We can also nest selectors which use **combinators**.
 
 ```bash
-/*------------ SCSS -------------*/
+/*------------ SASS -------------*/
 .card {
    > div {
       margin-top: 1rem;
    }
 }
-
 .card + {
     .card {
       margin: .5rem 0;
    }
 }
-
 h1 {
    ~ {
       p {
@@ -160,21 +157,54 @@ h1 ~ p{
 }
 ```
 
+- There are various **CSS** properties which start with same prefix & **Sass** makes it easier & less redundant by allowing these property declarations to be nested.
+
+```bash
+/*-------------- SASS ---------------*/
+.container {
+   font: {
+      size : 1rem;
+      weight: 400;
+      family: "Abeezee",sans-serif;
+   }
+
+   &:nth-of-type(2n+1) {
+      background-color: hsl(240deg 100% 90%);
+   }
+}
+
+/*-------------- CSS ----------------*/
+.container {
+   font-size: 1rem;
+   font-weight: 400;
+   font-family: "Abeezee",sans-serif;
+}
+
+.container:nth-of-type(2n+1) {
+   background-color: hsl(240deg 100% 90%);
+}
+```
+
 ### Interpolation
 
 - It is used to inject **expressions** like variables, functions calls into a selector.
-- It is very useful while writing **mixinx** because it allows creating selectors from the parameters passed in.
+
+- It always returns an **unquoted string** in **SassScript** which is quite useful for generating dynamic names.
+
+- It is very useful while writing **mixins** because it allows creating selectors from the parameters passed in.
+
+- It uses `#{}` syntax for injection.
 
 ```bash
 /*------------ SCSS -------------*/
 @mixin define-margin($size,$value) {
    .m-#{$size} {
-      margin: #{$value} + "px";
+      margin: #{$value};
    }
 }
-@include define-margin(4,4);
-@include define-margin(6,6);
-@include define-margin(8,8);
+@include define-margin(4,4px);
+@include define-margin(6,6px);
+@include define-margin(8,8px);
 
 /*----------- CSS -----------*/
 .m-4 {
@@ -188,4 +218,27 @@ h1 ~ p{
 }
 ```
 
--
+- **Sass** only parses selectors after _interpolation_ is resolved. That's why we can generate any part of selector safely using _interpolation_ without worrying that it will not parse.
+
+- Since _interpolation_ returns unquoted string that's it is a bad idea to use it with numbers since it can't be used for any math operation.
+
+- For numbers we can use **unit arithmetic** instead of _interpolation_. For example, instead of writing `#{$width}px`, write `$width * 1px` or better yet, declare the `$width` variable in terms of `px` to begin with. That way if `$width` already has units, you’ll get a nice error message instead of compiling bogus CSS.
+
+- To preserve quote of a string in _interpolation_, we can use `meta.use()` function.
+
+```bash
+/*-------------- SASS --------------*/
+@use "sass:meta";
+$font-serif: "serif","sans-serif;"
+
+:root {
+   --font-serif: #{meta.use($font-serif)};
+}
+
+/*-------------- CSS ---------------*/
+:root {
+   --font-serif: "serif", "sans-serif";
+}
+```
+
+###
