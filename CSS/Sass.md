@@ -393,6 +393,10 @@ $color-blue: hsl(220deg 100% 50%);
 
   - **Sass variables** are compiled to the value assigned to it, Where **CSS Variables** are included in css output.
 
-  - **Sass Variables** only have one value at a time whereas **CSS Variables** can have different values for different values for different elements.
+  - **Sass Variables** only have one value at a time whereas **CSS Variables** can have different values for different elements.
 
   - **Sass variables** are _imperative_, which means if you use a variable and then change its value, the earlier use will stay the same. **CSS variables** are _declarative_, which means if you change the value, it’ll affect both earlier uses and later uses.
+
+- **Sass Variables** like all **Sass Identifiers**, treat _hypen(-)_ & _underscore(\_)_ as identical.
+
+- **Sass** provides a `!default` flag, which assigns a value to a variable only if that variable is not defined or its value is `null`, Otherwise the existing value will be used.
