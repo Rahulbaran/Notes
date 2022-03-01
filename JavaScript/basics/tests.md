@@ -1,4 +1,4 @@
-#### Automated Testing
+### Automated Testing
 
 - It is a way of testing code with less human intervention.
 - It helps you keep your test files separated from your actual code.
@@ -21,7 +21,7 @@
 
 - In **BDD**, we follow **Red > Green > Refactor** approach.
 
-- Both of these methodology force us to write automated tests first and code second.
+- Both of these methodology force us to write _automated tests_ first and code second.
 
 ### Testing Types
 
@@ -43,3 +43,24 @@
 ##### mocha
 
 - We call all our test files in a directory called **test** in the root and write a script in **package.json** to run `mocha`.
+
+- `describe()` is used to define a **Test Suite**. It takes two arguments:-
+  - a string - Describes about the **Test Suit**
+  - a callback function - Contains all the **Test Specs**
+- Similar to `describe()`, `it()` also takes two arguments:-
+  - a string - Describes the behavior of **Test Spec**
+  - a callback function - It contains the expectation
+
+##### chai
+
+- `ok` is an assertion method in **chai**. It tests if a value is _truthy_.
+
+##### Test suite
+
+- A set of **test cases** that are used to test a software program for showing a specified behavior.
+
+- **Test suite** is used to test a particular behavior of a software.
+
+- Also known as **Validation suite**.
+
+- Each unit test is sometimes called a **Test Spec**.
