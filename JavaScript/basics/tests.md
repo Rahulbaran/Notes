@@ -8,8 +8,8 @@
 
 ### Testing Methodology (approach)
 
-1. **TDD (Test Driven Development)** - We write automated scripts for testing
-2. **BDD (Behavior Driven Development)** - We write whatever we are expecting from the application (in simple english) before writing any code.
+1. **TDD (Test Driven Development)** - We write automated scripts for testing and then write code.
+2. **BDD (Behavior Driven Development)** - We note whatever we are expecting from the application (in simple english) then we write the automated testing scripts & then code.
 
 - In **BDD** approach, we take the following steps:-
 
@@ -42,10 +42,10 @@
 
 ##### mocha
 
-- We call all our test files in a directory called **test** in the root and write a script in **package.json** to run `mocha`.
+- We call all our test files from a directory called **test** in the root and write a script in **package.json** to run `mocha`.
 
 - `describe()` is used to define a **Test Suite**. It takes two arguments:-
-  - a string - Describes about the **Test Suit**
+  - a string - Describes about the **Test Suite**
   - a callback function - Contains all the **Test Specs**
 - Similar to `describe()`, `it()` also takes two arguments:-
   - a string - Describes the behavior of **Test Spec**
