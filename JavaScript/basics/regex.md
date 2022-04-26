@@ -102,7 +102,7 @@ Array.from(foo.matchAll(/f?(oo(\w+))/g)); // 3 Arrays (matches)
 
 - Returns a new string with replacing some/all matches of a `pattern` by a `replacement`.
 
-- `pattern` can be either a string or a `RegExp` whereas `replacement` can be a string or a function to be called for each match.
+- `pattern` can be either a string or a `RegExp` whereas `replacement` can either be a **string** or a **callback function**.
 
 ##### Syntax
 
@@ -111,29 +111,22 @@ Array.from(foo.matchAll(/f?(oo(\w+))/g)); // 3 Arrays (matches)
 replace(pattern, replacement);
 ```
 
-- We use **g** flag in `RegExp` to replace all the matches with `replacement`.
+- We use **g(global)** flag in `RegExp` to replace all the matches with `replacement`.
 
 - Examples:-
 
 ```js
 const string = "My mummy is one of the best mummy in world";
 
-// String as a pattern
 string.replace("mummy", "papa"); // My papa is one of the best mummy in world
-
-// Regular Expression with "g" Flag as pattern
 string.replace(/mummy/g, "papa"); // My papa is one of the best papa in world
-
 string.replace(new RegExp("mummy", "g"), "papa"); // My papa is one of the best papa in world
 ```
 
-- Syntax of Callback Function used as replacement:-
+##### Syntax for callback function:-
 
 ```js
-function replacer(match, p1, p2, ...pn, offset, string) {
-
-}
-
+function replacer(match, p1, p2, ...pn, offset, string) {}
 /*
 * match - Matched substring
 * p1, p2, ...pn - captured groups
@@ -146,7 +139,9 @@ function replacer(match, p1, p2, ...pn, offset, string) {
 
 - Returns a new string with replacing all the matches of a `pattern` with a `replacement`.
 
-- Similar to **replace()** `pattern` can be either a string or a `RegExp` whereas `replacement` can be a string or a function to be called for each match.
+- Similar to `replace()`, `pattern` can either be a **string** or a **regular expression** whereas `replacement` can be a **string** or a **callback function**.
+
+- While using **regular expression** as `pattern` in `replaceAll()`,`g` flag is must.
 
 - Examples:-
 
@@ -213,7 +208,7 @@ split(separator, limit);
 
 - They indicate **groups & ranges** of expression characters.
 
-##### 4. Qunatifiers
+##### 4. Quantifiers
 
 - Indicates number of characters or expressions to match.
 
