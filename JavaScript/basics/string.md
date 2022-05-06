@@ -266,6 +266,7 @@ str.lastIndexOf("ram"); // 1
 ```js
 const sliceStr =
   "slice() is used to slice & return a section of string without affecting the actual string";
+
 sliceStr.slice(0, 2); // "sl"
 sliceStr.slice(-5, -1); // "trin"
 sliceStr.slice(0, -1); // whole string except last character
