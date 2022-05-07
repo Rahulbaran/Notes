@@ -162,6 +162,17 @@ cgpa.splice(2, 0, 7.54); // []
 cgpa.splice(-3, 1); // [8]
 ```
 
+#### concat()
+
+- Merges two or more arrays without changing the existing arrays.
+
+```js
+const cgpa = [7.63, 7.29, 7.77, 7.7, 8, 8.24, 7.79];
+const marks = [340, 310, 360, 355, 400, 410, 360];
+
+cgpa.concat(335, 353, marks); // [7.63, 7.29, 7.77, 7.7, 8, 8.24, 7.79, 335, 353, 340, 310, 360, 355, 400, 410, 360]
+```
+
 #### sort()
 
 -
@@ -200,7 +211,20 @@ cgpa.splice(-3, 1); // [8]
 
 #### forEach()
 
--
+- Executes a provided function (callback/arrow function) once for each array element.
+
+- We can't use `break` & `continue` keywords with `forEach()`.
+
+- **Syntax**
+
+```js
+forEach(element => {});
+forEach((element, index) => {});
+forEach((element, index, array) => {});
+
+forEach(callbackFn);
+forEach(callbackFn, thisArg);
+```
 
 #### includes()
 
@@ -216,7 +240,14 @@ cgpa.splice(-3, 1); // [8]
 
 #### join()
 
--
+- Joins all the elements of an **array** into a string based on specified separator string (default - **comma(,)**).
+- If `length` of array is **0** then _empty string_ is returned.
+
+```js
+const bodyElements = ["Fire", "Space", "Water", "Earth", "Air"];
+
+bodyElements.join("<-->");
+```
 
 #### map()
 
