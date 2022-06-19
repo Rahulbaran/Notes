@@ -1,15 +1,10 @@
 # [NodeJS]()
 
 - Node _REPL (Read-Eval-Print-Loop)_
-
 - All the codes written inside a moudule is wrapped into a _REPL_ function as IIFE and paremeters like `require`,`__dirname`,`__filename`,`exports` & `module` are passed into it by JavaScript Runtime.
-
 - `arguments` is an object(array like object) in JavaScript, which contains only `length` & `index` properties.
-
 - NodeJS has been built **asynchronously**.
-
 - In NodeJS, Every js file is treated as module (similar to python).
-
 - `npm` is a CLI tool to manage node packages(third party) & also a repository which contain all the node packages.
 
 - node packages are of two types -
@@ -18,9 +13,7 @@
   - **devDependencies** - The application uses package code in development phase to make project consistent and faster.
 
 - node packages can either be installed locally in project directory or globally in the system.
-
 - **Locally** installed node packages can not be directly used in command line instead we write `scripts` in `package.json` to run those packages.
-
 - most packages in npm follows semantic version rule which means their versions are represted using **3 numbers** (major, minor & patch versions) separated by dot.
   For Example - `nodemon - 1.18.11`
 
@@ -35,13 +28,9 @@
   - `*` allows major updates
 
 - **DNS** - Domain Name System (Like a Phonebook)
-
 - **TCP** - Transmission Control Protocol (Communication Protocol)
-
 - **IP** - Internet Protocol (Communication Protocol)
-
 - **HTTPS** - Data is encrypted using **SSL/TLS** Certificate
-
 - During the **DNS** lookup, Browser matches the Domain name with actual IP Address through **Internet Service Provider(ISP)**.
 
 - After **DNS** lookup, Browser makes a **TCP/IP Socket** Connection.
