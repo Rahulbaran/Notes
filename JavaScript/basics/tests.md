@@ -1,4 +1,4 @@
-### Automated Testing
+# Automated Testing
 
 - It is a way of testing code with less human intervention.
 - It helps you keep your test files separated from your actual code.
@@ -29,6 +29,16 @@
 - Integration Testing
 - End To End Testing
 
+### Test suite
+
+- A set of **test cases** that are used to test a software program for showing a specified behavior.
+
+- **Test suite** is used to test a particular behavior of a software.
+
+- Also known as **Validation suite**.
+
+- Each unit test is sometimes called a **Test Spec**.
+
 ### Some Testing Frameworks
 
 - **chai** - For Assertion Part of testing (Can be used for TDD & BDD Both). It is an expectation library.
@@ -40,7 +50,7 @@
 - **cucumber**
 - **cypress**
 
-##### mocha
+#### mocha
 
 - We call all our test files from a directory called **test** in the root and write a script in **package.json** to run `mocha`.
 
@@ -51,16 +61,33 @@
   - a string - Describes the behavior of **Test Spec**
   - a callback function - It contains the expectation
 
-##### chai
+#### chai
 
 - `ok` is an assertion method in **chai**. It tests if a value is _truthy_.
 
-##### Test suite
+#### jest
 
-- A set of **test cases** that are used to test a software program for showing a specified behavior.
+- Contains features of `chai` & `mocha` both.
 
-- **Test suite** is used to test a particular behavior of a software.
+- `describe()` is used to create a **test block** containing related tests.
 
-- Also known as **Validation suite**.
-
-- Each unit test is sometimes called a **Test Spec**.
+- `expect()` use **Matchers** to check for certain conditions. Some Common **Matchers** are:-
+  - `.toBe()`
+  - `.toEqual()`
+  - `.toStrictEqual()`
+  - `.toBeFalsy()`
+  - `.toBeTruthy()`
+  - `.toBeDefined()`
+  - `.toBeUndefined()`
+  - `.toBeNaN()`
+  - `.toBeNull()`
+  - `.toBeGreaterThan()`
+  - `.toBeGreaterThanOrEqual()`
+  - `.toBeLessThan()`
+  - `.toBeLessThanOrEqual()`
+  - `.toMatch()`
+  - `.toContain()`
+  - `.toHaveLength()`
+  - `.toBeInstanceOf()`
+  - `.toContain()`
+  - `.toThrow()`
