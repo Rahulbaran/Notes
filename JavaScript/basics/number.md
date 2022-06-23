@@ -102,4 +102,96 @@ Number.parseFloat([5, 4, 4, 3]); // 5
 
 #### Number.parseInt()
 
-- parses a string argument & returns an integer of the **specified radix/base**.
+- parses a string argument & returns an integer of the **specified radix/base(`2` to `36`)**.
+- If `radix` is smaller than `2` or greater than `36` then `NaN` is returned.
+- **Syntax**
+
+```js
+Number.parseInt(string);
+Number.parseInt(string, radix);
+```
+
+## Instance Methods
+
+#### Number.prototype.toExponential(fractionDigits)
+
+- It returns a string representing `Number` object in exponential notation.
+- Optionally It takes an argument `fractionDigits` which specifies the number of digits after the decimal point. Default value is as many digits as necessary to specify the number.
+- If `fractionDigits` is not in range `0` to `100` then `RangeError` is raised.
+- **Syntax**
+
+```js
+toExponential();
+toExponential(fractionDigits);
+```
+
+#### Number.prototype.toFixed()
+
+- It formats a number using fixed-point notation.
+- Optionally, it takes an argument `digits` which is number of digits to appear after the decimal point(a value between `0` & `20`).
+- **Syntax**
+
+```js
+toFixed();
+toFixed(digits);
+```
+
+- Possible **exceptions** are `RangeError` & `TypeError`.
+
+#### Number.prototype.valueOf()
+
+- It returns the wrapped primitive value of a `Number` object.
+- **Example**
+
+```js
+let numObj = new Number(145);
+typeof numObj; // object
+
+typeof numObj.valueOf(); // number
+```
+
+#### Number.prototype.toString(radix)
+
+- It returns a string representing the specified `Number` object.
+- Optionally, It takes an argument `radix` which is in range `2` through `36` and it specifies the base to use for representing numeric values.
+- **Example**
+
+```js
+const numObj = new Number(234);
+numObj.toString(16); // ea
+```
+
+- It raises `RangeError` when `radix` is not in range.
+
+#### Number.prototype.toPrecision()
+
+- It returns a string representing the `Number` object to the specified precision.
+- `precision` is in range `0` to `100`.
+- **Syntax**
+
+```js
+toPrecision();
+toPrecision(precision);
+```
+
+- `RangeError` is raised if `precision` is not in the given range.
+- **Example**
+
+```js
+const num = 123.434;
+
+num.toPrecision(); // 123.434
+num.toPrecision(5); // 123.43
+num.toPrecision(4); // 123.4
+num.toPrecision(3); // 123
+```
+
+#### Number.prototype.toLocaleString()
+
+- **Syntax**
+
+```js
+toLocaleString();
+toLocaleString(locales);
+toLocaleString(locales, options);
+```

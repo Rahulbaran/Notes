@@ -1,11 +1,8 @@
 # [Sass(Syntactically Awesome Stylesheet)](https://sass-lang.com/documentation)
 
-- A CSS Preprocessor (a stylesheet language) which is compiled to CSS.
-
+- A _CSS Preprocessor_ (a stylesheet language) which is compiled to CSS.
 - A Preprocessor is a program which takes input & produces output which is used as input by another program.
-
 - It helps keep large stylesheets well-organized & makes it easy to share design within & across projects.
-
 - It supports two different syntaxes:-
 
   1. **SCSS(Sassy CSS)** - It uses file extension `.scss`. It is a superset of CSS which means **all valid css is valid scss as well**.
@@ -18,7 +15,7 @@
   }
   ```
 
-  2. **The Indented Syntax** - It is based on Indentation rather than block and uses file extension `.sass`. It is sometimes called **Sass** because of extension.
+  2. **The Indented Syntax** - It is based on Indentation rather than block and uses file extension `.sass`. It is sometimes called Sass because of extension.
 
   ```sass
   @mixin flex($just, $align)
@@ -27,19 +24,23 @@
    align-items: $align;
   ```
 
-- **CSS** automatically recovers from **most invalid syntaxes** raised in the stylesheet whereas **Sass** fails parsing & raises error with specifying the location of invalid syntax & cause of error.
-
+- CSS automatically recovers from **most invalid syntaxes** raised in the stylesheet whereas Sass fails parsing & raises error with specifying the location of invalid syntax & cause of error.
 - Here, We will mainly focus on **SCSS**.
+
+#### Partials
+
+- It is a Sass file named with a leading underscore (like **\_partial.scss**).
+- The underscore lets Sass know that the file should not be generated into a css file.
+- It is a great way to modularize your css & help keep things easier to maintain.
 
 ## Syntax
 
 ### Statements
 
-- A series of _statements_ is used to build up a **Sass** stylesheet which is evaluated to get the resulting **CSS**.
-
+- A series of _statements_ is used to build up a Sass stylesheet which is evaluated to get the resulting CSS.
 - There are following types of _statements_:-
 
-  1. Universal Statements - These statements can be used anywhere in a **Sass** stylesheet:
+  1. Universal Statements - These statements can be used anywhere in a Sass stylesheet:
 
      - Variable Declarations (for eg:- $var:value)
      - Flow control at-rules (like `@if` & `@each`)
@@ -51,7 +52,7 @@
      - `@include` for Mixin use
      - `@at-root` rule
 
-  3. Top-Level Statements - These statements can only be used at top level of a stylesheet/nested within a **CSS** statement at top level:
+  3. Top-Level Statements - These statements can only be used at top level of a stylesheet/nested within a CSS statement at top level:
 
      - `@use` for loading Modules
      - `@import` for imports
@@ -61,32 +62,26 @@
   4. Other Statements
 
      - Property declarations like `pointer:none;` only within style rules & some css at-rules.
-
      - `@extend` rule only within style rules.
 
 ### Expression
 
 - It is anything which goes on the right hand side of a property/variable declaration.
-
 - Each expression produces a **value**.
-
-- Any valid **CSS** property value is also a **Sass** _expression_.
+- Any valid CSS property value is also a Sass _expression_.
 
 ### Comments
 
-- Single line comments start with **//**, They are also called **silent comments** because they don't produce any **CSS**.
-
-- Multi-line comments start with **/\*** & end with **\*/**. They are also called **loud comments**.
-
-- If a Multi-line comment starts with **/\*!** then it will always be included in the css output.
+- Single line comments start with `//`, They are also called **silent comments** because they don't produce any CSS.
+- Multi-line comments start with `\*` & end with `*/`. They are also called **loud comments**.
+- If a Multi-line comment starts with `\*` then it will always be included in the css output.
 
 ## Style Rules
 
 ### Nesting
 
-- **Sass** allows writing of one style rule inside another rather than repeating the same selectors over & over.
-
-- Nesting of selectors should be **shallow** to avoid complexity in visualizing and save bandwidth required to parse it to **CSS**.
+- Sass allows writing of one style rule inside another rather than repeating the same selectors over & over.
+- Nesting of selectors should be **shallow** to avoid complexity in visualizing and save bandwidth required to parse it to CSS.
 
 ```css
 /*-------------- SASS -------------*/
@@ -161,7 +156,7 @@ h1 ~ p {
 }
 ```
 
-- There are various **CSS** properties which start with same prefix & **Sass** makes it easier & less redundant by allowing these property declarations to be nested.
+- There are various CSS properties which start with same prefix & Sass makes it easier & less redundant by allowing these property declarations to be nested.
 
 ```css
 /*-------------- SASS ---------------*/
@@ -192,11 +187,8 @@ h1 ~ p {
 ### Interpolation
 
 - It is used to inject **expressions** like variables, functions calls into a selector.
-
 - It always returns an **unquoted string** in **SassScript** which is quite useful for generating dynamic names.
-
 - It is very useful while writing **mixins** because it allows creating selectors from the parameters passed in.
-
 - It uses `#{}` syntax for injection.
 
 ```css
@@ -222,13 +214,10 @@ h1 ~ p {
 }
 ```
 
-- **Sass** only parses selectors after _interpolation_ is resolved. That's why we can generate any part of selector safely using _interpolation_ without worrying that it will not parse.
-
+- Sass only parses selectors after _interpolation_ is resolved. That's why we can generate any part of selector safely using _interpolation_ without worrying that it will not parse.
 - Since _interpolation_ returns unquoted string that's it is a bad idea to use it with numbers since it can't be used for any math operation.
-
 - For numbers we can use **unit arithmetic** instead of _interpolation_. For example, instead of writing `#{$width}px`, write `$width * 1px` or better yet, declare the `$width` variable in terms of `px` to begin with. That way if `$width` already has units, you’ll get a nice error message instead of compiling bogus CSS.
-
-- To preserve quote of a string in _interpolation_, we can use `meta.inspect()` function provided by .
+- To preserve quote of a string in _interpolation_, we can use `meta.inspect()` function provided.
 
 ```css
 /*-------------- SASS --------------*/
@@ -247,7 +236,7 @@ $font-serif: "serif","sans-serif;"
 
 ### Hidden Declarations
 
-- Sometimes we want a property declaration to show up in a particular situation. If declaration's value is **null** or an empty **unquoted string**, **Sass** will not compile it to **CSS**.
+- Sometimes we want a property declaration to show up in a particular situation. If declaration's value is `null` or an empty **unquoted string**, Sass will not compile it to CSS.
 
 ```css
 $display-block: false;
@@ -259,11 +248,9 @@ h1 {
 
 ### Parent Selector
 
-- **&** is known as **Parent selector**. It is a special selector which is used in nesting of selectors.
-
-- **Parent Selector** makes it possible to reuse in complex ways (like adding a selector before parent, using with pseudo class & elements).
-
-- **Parent Selector** is quite useful when we are following **BEM** methodology. We can use the selector to add **Suffixes.**
+- `&` is known as **Parent selector**. It is a special selector which is used in nesting of selectors.
+- It makes it possible to reuse in complex ways (like adding a selector before parent, using with pseudo class & elements).
+- It is quite useful when we are following **BEM** methodology since we can use the selector to add **Suffixes.**
 
 ```css
 /*------------------ SASS -------------------*/
@@ -310,12 +297,9 @@ body .footer {
 
 ### Placeholder Selectors
 
-- It is a special kind of selector in **Sass**, which looks & acts a lot like class selector.
-
-- It starts with **%** & it's not included in **CSS** output, but it can be **extended**
-
-- Unlike class Selectors, placeholders don't clutter up(filling a space in a disorderly way) the **CSS**.
-
+- It is a special kind of selector in Sass, which looks & acts a lot like class selector.
+- It starts with `%` & it's not included in CSS output, but it can be **extended**
+- Unlike class Selectors, placeholders don't clutter up(filling a space in a disorderly way) the CSS.
 - We can also extend **Class Selector** if needed.
 
 ```css
@@ -373,9 +357,8 @@ body .footer {
 
 ## Variables
 
-- a **Sass** variable appears similar to **property declaration**. It starts with **$** followed by an identifier & a value is assigned to it.
-
-- It can be declared anywhere in the **Sass** stylesheet.
+- a Sass variable appears similar to **property declaration**. It starts with `$` followed by an identifier & a value is assigned to it.
+- It can be declared anywhere in the Sass stylesheet.
 
 ```css
 /*!------------- Syntax --------------*/
@@ -391,12 +374,9 @@ $color-blue: hsl(220deg 100% 50%);
 
 - There are following differences between **CSS Variables** & **Sass Variables** :-
 
-  - **Sass variables** are compiled to the value assigned to it, Where **CSS Variables** are included in css output.
-
+  - **Sass variables** are compiled to the value assigned to it, Whereas **CSS Variables** are included in css output.
   - **Sass Variables** only have one value at a time whereas **CSS Variables** can have different values for different elements.
-
   - **Sass variables** are _imperative_, which means if you use a variable and then change its value, the earlier use will stay the same. **CSS variables** are _declarative_, which means if you change the value, it’ll affect both earlier uses and later uses.
 
 - **Sass Variables** like all **Sass Identifiers**, treat _hypen(-)_ & _underscore(\_)_ as identical.
-
-- **Sass** provides a `!default` flag, which assigns a value to a variable only if that variable is not defined or its value is `null`, Otherwise the existing value will be used.
+- Sass provides a `!default` flag, which assigns a value to a variable only if that variable is not defined or its value is `null`, Otherwise the existing value will be used.
