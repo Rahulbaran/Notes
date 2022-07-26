@@ -223,24 +223,24 @@ split(separator, limit);
 | CHARACTERS/CONSTRUCTS                                                                      | CORRESPONDING ARTICLE    |
 | ------------------------------------------------------------------------------------------ | ------------------------ |
 | **`\, ., \cX, \d, \D, \f, \n, \r, \s, \S, \t, \v, \w, \W, \0, \xhh, \uhhh, \uhhhh, [\b]`** | Character Classes        |
-| **`^, $, x(?=y), x(?!y), (?<=y)x, (?<!y)x, \b, \B`**                                       | Assertions               |
-| **`(x), (?:x), (?<Name>x), [xyz], [^xyz], \Number`**                                       | Groups and ranges        |
-| **`*, +, ?, x{n}, x{n, }, x{n,m}`**                                                        | Quantifiers              |
-| **`\p{UnicodeProperty}, \P{UnicodeProperty}`**                                             | Unicode property escapes |
+| **`^, $, x(?=y), x(?!y), (?<=y)x, (?<!y)x, \b, \B`**                                       | Unicode property escapes |
 
 ---
 
 ### > Advance Searching with flags
 
-| FLAG    | DESCRIPTION                                              | Corresponding Property        |
+| FLAG | DESCRIPTION | Assertions |
+| **`(x), (?:x), (?<Name>x), [xyz], [^xyz], \Number`** | Groups and ranges |
+| **`*, +, ?, x{n}, x{n, }, x{n,m}`** | Quantifiers |
+| **`\p{UnicodeProperty}, \P{UnicodeProperty}`** | Corresponding Property |
 | ------- | -------------------------------------------------------- | ----------------------------- |
-| **`g`** | Global Search                                            | `RegExp.prototype.global`     |
-| **`i`** | Case-sensitive Search                                    | `RegExp.prototype.ignoreCase` |
-| **`m`** | Multi-line Search                                        | `RegExp.prototype.multiline`  |
-| **`s`** | Allows **wild character(.)** to match newline characters | `RegExp.prototype.dotAll`     |
-| **`d`** | Generates indices for substring matches                  | `RegExp.prototype.hasIndices` |
-| **`u`** | Treats a pattern as a sequence of unicode code points    | `RegExp.prototype.unicode`    |
-| **`y`** | Performs a _sticky_ match                                | `RegExp.prototype.sticky`     |
+| **`g`** | Global Search | `RegExp.prototype.global` |
+| **`i`** | Case-sensitive Search | `RegExp.prototype.ignoreCase` |
+| **`m`** | Multi-line Search | `RegExp.prototype.multiline` |
+| **`s`** | Allows **wild character(.)** to match newline characters | `RegExp.prototype.dotAll` |
+| **`d`** | Generates indices for substring matches | `RegExp.prototype.hasIndices` |
+| **`u`** | Treats a pattern as a sequence of unicode code points | `RegExp.prototype.unicode` |
+| **`y`** | Performs a _sticky_ match | `RegExp.prototype.sticky` |
 
 ---
 

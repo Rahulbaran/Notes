@@ -58,6 +58,7 @@
      - `@import` for imports
      - `@mixin` for defining Mixin
      - `@function` for defining funtions
+     - `@forward` for forwarding sass codes
 
   4. Other Statements
 
