@@ -4,7 +4,7 @@
 
 ## Constructor
 
-##### Date()
+#### Date()
 
 - When it is called as a **function** then it returns a string representation of the current date & time.
 - Any argument passed in it, is ignored.
@@ -72,7 +72,7 @@ Date.UTC(2011, 10, 14); // 1321228800000
 
 ## Instance Methods
 
-##### Date.prototype.getDate()
+#### Date.prototype.getDate()
 
 - Returns the day of the month for the specifed date according to _local time_.
 - **Example**
@@ -81,7 +81,7 @@ Date.UTC(2011, 10, 14); // 1321228800000
 new Date().getDate(); // 10
 ```
 
-##### Date.prototype.getDay()
+#### Date.prototype.getDay()
 
 - Returns the day of week as index(`0`-`6`) according to _local time_, where `0` represents **Sunday**.
 - **Example**
@@ -91,7 +91,7 @@ const vacantDate = new Date(`Jan 25 2022 14:10:45`);
 vacantDate.getDay(); // 2 ---> Tuesday
 ```
 
-##### Date.prototype.getFullYear()
+#### Date.prototype.getFullYear()
 
 - Returns the year of the specified date according to _local time_.
 - **Example**
@@ -100,7 +100,7 @@ vacantDate.getDay(); // 2 ---> Tuesday
 const birthYear = new Date("5 April 1996 15:10:59").getFullYear(); // 1996
 ```
 
-##### Date.prototype.getMonth()
+#### Date.prototype.getMonth()
 
 - Returns the month(`0`-`11`) in the specified date according to _local time_.
 - **Example**
@@ -109,7 +109,7 @@ const birthYear = new Date("5 April 1996 15:10:59").getFullYear(); // 1996
 const birthMonth = new Date(1996, 3, 05).getMonth(); // 3
 ```
 
-##### Date.prototype.getHours()
+#### Date.prototype.getHours()
 
 - Returns the hour (`0`-`23`) in the specified date according to _local time_.
 - **Example**
@@ -118,7 +118,7 @@ const birthMonth = new Date(1996, 3, 05).getMonth(); // 3
 const currentHour = new Date().getHours(); // 10
 ```
 
-##### Date.prototype.getMinutes()
+#### Date.prototype.getMinutes()
 
 - Returns the minutes(`0`-`59`) in the specified date according to _local time_.
 - **Example**
@@ -128,7 +128,7 @@ const examDate = new Date("June 20 2021 11:00:00.423");
 birthDate.getMinutes(); // 0
 ```
 
-##### Date.prototype.getMilliseconds()
+#### Date.prototype.getMilliseconds()
 
 - Returns the milliseconds (`0`-`999`) in the specified date according to _local time_.
 - **Example**
@@ -138,7 +138,7 @@ const curDate = new Date();
 curDate.getMilliseconds(); // 854
 ```
 
-##### Date.prototype.getSeconds()
+#### Date.prototype.getSeconds()
 
 - Returns the seconds(`0`-`59`) in the specified date according to _local time_.
 - **Example**
@@ -148,7 +148,7 @@ const date = new Date();
 date.getSeconds(); // 42
 ```
 
-##### Date.prototype.getTime()
+#### Date.prototype.getTime()
 
 - Returns the numeric value of the specified date as the number of milliseconds since _Jan 1 1970, 00:00:00 UTC_.
 - If specified date is before _Jan 1 1970_ then negative values are returned in milliseconds.
@@ -158,27 +158,26 @@ date.getSeconds(); // 42
 const curTimeInMs = new Date().getTime(); // 1654849848644
 ```
 
-##### Date.prototype.getTimezoneOffset()
+#### Date.prototype.getTimezoneOffset()
 
 - Returns the difference between a date evaluated in UTC timezone & the same date evaluated in local timezone, in minutes.
 - number of minutes is positive if UTC timezone is behind local timezone and if it is ahead of local timezone then value is negative.
 
-##### Date.prototype.getUTCDate(), Date.prototype.getUTCDay(), Date.prototype.getUTCFullYear(), Date.prototype.getUTCMonth(), Date.prototype.getUTCHours(), Date.prototype.getUTCMinutes(), Date.prototype.getUTCSeconds(), Date.prototype.getUTCMilliSeconds()
+#### Date.prototype.getUTCDate(), Date.prototype.getUTCDay(), Date.prototype.getUTCFullYear(), Date.prototype.getUTCMonth(), Date.prototype.getUTCHours(), Date.prototype.getUTCMinutes(), Date.prototype.getUTCSeconds(), Date.prototype.getUTCMilliSeconds()
 
 > In all the above _UTC based_ `Date` object methods, returned values are based on universal date.
 
-##### Date.prototype.setDate()
+#### Date.prototype.setDate()
 
 - Sets the day of the month for a specified date according to _local time_.
 - **Example**
 
 ```js
 const curDate = new Date();
-
 const futureDate = new Date(curDate.setDate(20)); // Mon Jun 20 2022 14:27:59 GMT+0530 (IST)
 ```
 
-##### Date.prototype.setFullYear()
+#### Date.prototype.setFullYear()
 
 - Sets the full year for a specified date according to _local time_.
 - **Example**
@@ -188,7 +187,7 @@ const curTime = new Date();
 const birthYear = new Date(curTime.setFullYear(1996)).getFullYear(); // 1996
 ```
 
-##### Date.prototype.setMonth()
+#### Date.prototype.setMonth()
 
 - Sets the month for a specified date according to _local time_.
 - **Example**
@@ -200,7 +199,7 @@ const setMonthFunc = date => {
 setMonthFunc(new Date()); // 1657593298030
 ```
 
-##### Date.prototype.setHours()
+#### Date.prototype.setHours()
 
 - Sets the hours for a specifed date according to _local time_.
 - **Example**
@@ -209,7 +208,7 @@ setMonthFunc(new Date()); // 1657593298030
 const setOwnHours = new Date().setHours(10); // 1655008670759
 ```
 
-##### Date.prototype.setMinutes()
+#### Date.prototype.setMinutes()
 
 - Sets the minutes for a specified date according to _local time_.
 - **Example**
@@ -218,7 +217,7 @@ const setOwnHours = new Date().setHours(10); // 1655008670759
 const setOwnMinutes = new Date().setMinutes(49); // 1655003970138
 ```
 
-##### Date.prototype.setSeconds()
+#### Date.prototype.setSeconds()
 
 - Sets the seconds for a specified date according to _local time_.
 - **Example**
@@ -227,7 +226,7 @@ const setOwnMinutes = new Date().setMinutes(49); // 1655003970138
 const setOwnSeconds = new Date().setSeconds(32); // 1655001890032
 ```
 
-##### Date.prototype.setMilliSeconds()
+#### Date.prototype.setMilliSeconds()
 
 - Sets the milliseconds for a specified date according to _local time_.
 - **Example**
@@ -236,7 +235,7 @@ const setOwnSeconds = new Date().setSeconds(32); // 1655001890032
 const setMilliSec = new Date().setMilliSeconds(300); // 1655029890400
 ```
 
-##### Date.prototype.setTime()
+#### Date.prototype.setTime()
 
 - Takes `Date` object as argument and sets a time represented in milliseconds since _January 1, 1970, 00:00:00 UTC_.
 - **Example**
@@ -245,11 +244,11 @@ const setMilliSec = new Date().setMilliSeconds(300); // 1655029890400
 const futureTime = new Date().setTime(Date.UTC(2024, 10, 23, 21, 54, 23, 545)); // 1732398863545
 ```
 
-##### Date.prototype.setUTCDate(), Date.prototype.setUTCFullYear(), Date.prototype.setUTCMonth(), Date.prototype.setUTCHours(), Date.prototype.setUTCMinutes(), Date.prototype.setUTCSeconds(), Date.prototype.setUTCMilliseconds()
+#### Date.prototype.setUTCDate(), Date.prototype.setUTCFullYear(), Date.prototype.setUTCMonth(), Date.prototype.setUTCHours(), Date.prototype.setUTCMinutes(), Date.prototype.setUTCSeconds(), Date.prototype.setUTCMilliseconds()
 
 - These all methods set the time based on _UTC time_.
 
-##### Date.prototype.toDateString()
+#### Date.prototype.toDateString()
 
 - Returns the _date_ protion of the `Date` as a human-readable string.
 - **Example**
@@ -259,7 +258,7 @@ const openingDate = new Date(2022, 06, 05, 12, 45, 23);
 openingDate.toDateString(); // 'Tue Jul 05 2022'
 ```
 
-##### Date.prototype.toTimeString()
+#### Date.prototype.toTimeString()
 
 - Returns the _time_ portion of the `Date` as a human-readable string.
 - **Example**
@@ -269,7 +268,7 @@ const startDate = new Date(2022, 06, 15, 8, 13, 10);
 startDate.toTimeString(); // '08:13:10 GMT+0530 (India Standard Time)'
 ```
 
-##### Date.prototype.toString()
+#### Date.prototype.toString()
 
 - Returns a string representing the specified `Date` object.
 - **Example**
@@ -279,7 +278,7 @@ const giveawayDate = new Date(2023, 0, 14, 23, 59, 0);
 giveawayDate.toString(); // 'Sat Jan 14 2023 23:59:00 GMT+0530 (India Standard Time)'
 ```
 
-##### Date.prototype.toUTCString()
+#### Date.prototype.toUTCString()
 
 - Returns a string representing `Date` object in _UTC timezone_.
 - **Example**
@@ -289,7 +288,7 @@ const date = new Date();
 date.toUTCString(); // 'Tue, 14 Jun 2022 08:25:16 GMT'
 ```
 
-##### Date.prototype.toISOString()
+#### Date.prototype.toISOString()
 
 - Converts a date to a string following the _ISO 8601_ Extended Format.
 - **Example**
@@ -299,7 +298,7 @@ const date = new Date(2022, 06, 04, 16, 34, 45);
 date.toISOString(); // '2022-07-04T11:04:45.000Z'
 ```
 
-##### Date.prototype.toJSON()
+#### Date.prototype.toJSON()
 
 - Returns a string representing the `Date` using `toISOString()`.
 - It is intended for use by `JSON.stringify()`.
@@ -310,7 +309,7 @@ const newDate = new Date();
 newDate.toJSON(); // '2022-06-14T08:46:42.826Z'
 ```
 
-##### Date.prototype.toGMTString()
+#### Date.prototype.toGMTString()
 
 - Returns a string representing the `Date` based on _GMT (UTC) timezone_.
 - **Example**
@@ -320,7 +319,7 @@ const curDate = new Date();
 curDate.toGMTString(); // 'Tue, 14 Jun 2022 08:49:50 GMT'
 ```
 
-##### Date.prototype.toLocaleDateString()
+#### Date.prototype.toLocaleDateString()
 
 - Returns a string containing date portion of `Date` object based on system settings (_locality-sensitive representation_).
 - **Example**
@@ -330,7 +329,7 @@ const newDate = new Date("Jun 25 2022 15:45:34.524");
 newDate.toLocaleDateString(); // '6/25/2022'
 ```
 
-##### Date.prototype.toLocaleTimeString()
+#### Date.prototype.toLocaleTimeString()
 
 - Returns a string containing time portion of `Date` object based on system settings (_locality-sensitive representation_).
 - **Example**
@@ -340,17 +339,44 @@ const travelDate = new Date("21 Aug 2023 05:15:43");
 travelDate.toLocaleTimeString(); // '5:15:43 AM'
 ```
 
-##### Date.prototype.toLocaleString()
+#### Date.prototype.toLocaleString()
 
 - Returns a string containing `Date` based on system settings (_locality-sensitive representation_).
-- **Example**
+- It also takes an optional argument `options` which is an object containing following properties:-
+  - `dateStyle` (full, long, medium, short).
+  - `timeStyle` (full, long, medium, short).
+  - `calender` (dangi, ethioaa, buddhist, japanese, indian)
+  - `dayPeriod` (narrow, short, long)
+  - `numberingSystem` (bali, beng, limb, mong, telu etc.)
+  - `timeZone` (Asia/Shanghai, Asia/Kolkata, America/New_York)
+  - `localeMatcher` (lookup, best fit)
+  - `hour12` (true, false)
+  - `hourCycle` (h11, h12, h23, h24)
+  - `formatMatcher` (basic, best fit)
+  - `weekday` (long, short, narrow)
+  - `era` (long, short, narrow)
+  - `year` (numeric, 2-digit)
+  - `month` (numeric, 2-digit, long, short, narrow)
+  - `day` (numeric, 2-digit)
+  - `hour` (numeric, 2-digit)
+  - `minute` (numeric, 2-digit)
+  - `second` (numeric, 2-digit)
+  - `fractionalSecondDigits` (number of digits used to represent fractions of a second ---> 0, 1, 2, 3)
+  - `timeZoneName` (long, short, shortOffset, longOffset, shortGeneric, longGeneric)
 
 ```js
+// Syntax
+toLocaleString();
+toLocaleString(locale);
+toLocaleString(locale, options);
+
 const futureDate = new Date("Jun 25 2022 15:45:34.524");
 futureDate.toLocaleString(); // '6/18/2022, 2:52:52 AM'
 ```
 
-##### Date.prototype.valueOf()
+> All the parameters of `options` is similar to `options` in `Intl.DateTimeFormat()`.
+
+#### Date.prototype.valueOf()
 
 - Returns the primitive value(numerical value) of a `Date` object.
 - **Example**
