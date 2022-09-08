@@ -15,7 +15,6 @@ selector {
 #### clamp()
 
 - It takes 3 comma separated expressions as its parameters in order of _minimum value_, _preferred value_ & _maximum value_.
-
 - resultant value is calculated as:-
 
 ```css

@@ -1,7 +1,6 @@
 # [At-rules](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule)
 
 - These are the **CSS Statements** which instruct **CSS** how to behave.
-
 - They starts with `@` sign followed by an identifier & includes everything upto the next **semicolon** or the next **CSS block** whichever comes first.
 
 ## Regular At-rules
@@ -140,7 +139,7 @@
 
 #### Defining Cascade Layers
 
-1. Using `@layer` with a block for layer styles
+##### Using `@layer` with a block for layer styles
 
 ```css
 @layer base {
@@ -149,7 +148,7 @@
 }
 ```
 
-2. Using `@import` with `layer()` function
+##### Using `@import` with `layer()` function
 
 ```css
 @import url(header.css) layer(navigation);
@@ -198,7 +197,5 @@
   ...;
 }
 ```
-
--
 
 > [Article on](https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/) `@layer`

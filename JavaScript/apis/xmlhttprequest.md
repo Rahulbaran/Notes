@@ -1,11 +1,8 @@
 # [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
 
 - This API is used to interact with servers.
-
 - Data can be retrieved from a URL without full page referesh.
-
 - Used Heavily in **AJAX(Asynchronous JavaScript XML)**
-
 - Can be used to retrieve any type of data.
 
 ## Constructor
@@ -76,7 +73,6 @@ const xhr = new XMLHttpRequest();
 #### XMLHttpRequest.timeout
 
 - Used to set a time for a request before it is automatically terminated.
-
 - Time is set in **milliseconds**.
 
 #### XMLHttpReuqest.withCredentials
@@ -96,8 +92,7 @@ Note:- **DOMString** behaves similar to JavaScript **String**.
 #### XMLHttpRequest.abort()
 
 - To abort the request if it has already been sent.
-
-- It cancels the request
+- It cancels the request.
 
 #### XMLHttpRequest.getAllResponseHeaders()
 
@@ -110,7 +105,6 @@ Note:- **DOMString** behaves similar to JavaScript **String**.
 #### XMLHttpRequest.open()
 
 - Used to initialize a request.
-
 - It takes 3 arguments.
   - request method (GET,POST,PUT,DELETE,PATCH etc.)
   - request URL
@@ -123,15 +117,12 @@ Note:- **DOMString** behaves similar to JavaScript **String**.
 #### XMLHttpRequest.send()
 
 - To send a request after initializing it using **open()**.
-
 - If the request is asynchronous (which is the default), this method returns as soon as the request is sent.
 
 #### XMLHttpRequest.setRequestHeader()
 
 - To set the header of HTTP request.
-
 - It should be used after **open()** but before **send()**.
-
 - It allows setting one header (key-value) at one call which means to set multiple headers we will have to call it multiple times.
 
 ## Events
@@ -176,11 +167,8 @@ Note:- **DOMString** behaves similar to JavaScript **String**.
 - Form data can be sent in formats like `multipart/form-data`, JSON, XML etc.
 
 - In the event of a communication error (such as the server going down), an exception will be thrown in the **onreadystatechange** method when accessing the response status. To mitigate this, we can wrap it inside `try...catch`.
-
 - When using **FormData** to submit POST requests using **XMLHttpRequest** or the **Fetch_API** with the `multipart/form-data` Content-Type (e.g. when uploading Files and Blobs to the server), _do not explicitly set the Content-Type header on the request_. Doing so will prevent the browser from being able to set the Content-Type header with the boundary expression it will use to delimit form fields in the request body.
-
 - For a form to **accept files** we have to mention _encodiing type(enctype)_ to `multipart/form-data`
-
 - To send any file to server using **FormData**, we have to use **files property** on _input file field_ to access all the uploaded files which returns an array of all the files uploaded then we append those files in **formData**.
 
 ```js
