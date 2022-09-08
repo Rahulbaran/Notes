@@ -162,13 +162,11 @@
 
 #### stroke-mitrelimit
 
--
-
 #### stroke-opacity
 
 - Defines opacity of the paint server(color, gradient, pattern etc) specified in `stroke`.
 - Default value - `1`
-- Takes value in range of `0` to `1` or `0%` to `100%`.
+- Takes value in range of either `0` to `1` or `0%` to `100%`.
 
 #### stroke-dasharray
 
