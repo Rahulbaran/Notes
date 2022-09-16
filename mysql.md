@@ -298,13 +298,20 @@ ALTER TABLE players DROP COLUMN registration_on;
 
 #### Rename column
 
+- We can rename a column using either **CHANGE** statement or **RENAME** statement.
+
 ```sql
--- Syntax
+-- CHANGE Statement Syntax
 ALTER TABLE table_name CHANGE COLUMN old_name new_name
 column_definition [FIRST|AFTER column_name];
+-- RENAME Statement Syntax
+ALTER TABLE table_name RENAME COLUMN old_column_name TO new_column_name;
 -- Example
 ALTER TABLE players CHANGE COLUMN age player_age TINYINT UNSIGNED NOT NULL;
+ALTER TABLE players RENAME COLUMN player_age TO age;
 ```
+
+> We can rename multiple columns at once.
 
 #### Rename table
 
@@ -333,6 +340,125 @@ TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
+```
+
+### Describe Table
+
+- There are two ways to check columns from a table of another database:-
+
+  1. `SHOW COLUMNS FROM <database>.<table>`;
+  2. `SHOW COLUMNS FROM <table> IN <database>`;
+
+- **EXPLAIN** keyword is used with `INSERT`, `SELECT`, `UPDATE`, `DELETE` & `REPLACE` queries to get information about table.
+
+```sql
+EXPLAIN SELECT * FROM customer;
+```
+
+### Temporary Table
+
+- A special table that allows to **keep temporary data**.
+- It is visible & accessible only for the **current session**.
+- We can also use **DROP TABLE** command for removing this table explicitly.
+- The table can only be created when the MySQL server has the **CREATE TEMPORARY TABLES** privilege.
+- If an user creates a **temporary table** with the same name as a **normal table** in database then **normal table** becomes inaccessible till **temporary table** is in database.
+
+##### Syntax of creating temporary table
+
+```sql
+-- new temporary table
+CREATE TEMPORARY TABLE table_name(
+  column_1, column_2, ..., table_constraints
+);
+-- temporary table of structure similar to an existing table
+CREATE TEMPORARY TABLE temporary_table_name SELECT * FROM original_table_name LIMIT 0;
+-- Example
+CREATE TEMPORARY TABLE members SELECT * FROM users LIMIT 0;
+```
+
+##### Syntax to drop a temporary table
+
+```sql
+-- Syntax
+DROP TEMPORARY TABLE table_name;
+-- Example
+DROP TEMPORARY TABLE members;
+```
+
+> `SELECT * FROM information_schema.innodb_temp_table_info\G;` command outputs all the temporary table created.
+
+### Copy/Clone/Duplicate Table
+
+- A feature which allows us to create a **duplicate table of an existing table**.
+- Creating a **duplicate table** is very useful when either we want to backup data or we need to perform something(test) without affecting the original table.
+
+```sql
+-- Syntax
+CREATE TABLE [IF NOT EXISTS] new_table_name SELECT col1, ..., colN FROM existing_table_name;
+-- Example
+CREATE TABLE backup_users SELECT * FROM users;
+```
+
+- The above command copies only the table & its data, not all the dependent objects of table (such as indexes, triggers, primary key constriants, foreign key constraints etc). To copy these objects, we use below command:-
+
+```sql
+-- Syntax
+CREATE TABLE IF NOT EXISTS new_table_name LIKE existing_table_name;
+INSERT new_table_name SELECT * FROM existing_table_name;
+
+-- Example
+CREATE TABLE duplicate_table LIKE original_table;
+INSERT duplicate_table SELECT * FROM original_table;
+```
+
+### Repair Table
+
+### View
+
+- A **virtual table** created by a query by joining one or more tables.
+- It does not contain any data of its own.
+- It is built on top of other table/view, which means any changes occur in underlying table affects the view.
+- There are following advantages of view in MySQL:-
+  - **Simplify complex query**
+  - **Increases the Re-usability**
+  - **Help in Data Security** - Allows us to show only authorized information to the users and hide essential data.
+  - **Enable Backward Compatibility**
+
+#### Create view
+
+- **CREATE VIEW** statement is used for creating views.
+- If we don't use `OR REPLACE` & VIEW already exists then **CREATE VIEW** statement will return an error.
+
+```sql
+-- Syntax
+CREATE [OR REPLACE] VIEW view_name AS
+SELECT columns FROM tables [WHERE conditions];
+-- Example
+CREATE OR REPLACE VIEW users_below_25 AS SELECT * FROM users;
+```
+
+#### Show view
+
+#### Update view
+
+- **ALTER VIEW** statement is used to modify or update a view.
+
+```sql
+-- Syntax
+ALTER VIEW view_name AS SELECT columns FROM table_name WHERE conditions.
+-- Example
+ALTER VIEW users_below 25 as SELECT fullname,username,age FROM users;
+```
+
+#### Drop view
+
+- **DROP VIEW** statement is used to drop existing VIEW.
+
+```sql
+-- Syntax
+DROP VIEW [IF EXISTS] view_name;
+-- Exanple
+DROP VIEW IF EXISTS users_below_25;
 ```
 
 ## MySQL Keys
@@ -455,7 +581,7 @@ CREATE TABLE users (
 
 ```sql
 -- Syntax
-SHOW FULL COLUMNS FROM <column_name>;
+SHOW [EXTENDED] FULL COLUMNS FROM <table_name>;
 ```
 
 - To change a comment of a column we use `ALTER` Command.
