@@ -176,7 +176,6 @@ GRANT <privilege> ON *.* TO account_name;
 CREATE USER rahul@localhost IDENTIFIED BY 'rahulkumar124';
 GRANT ALL PRIVILEGES ON *.* TO rahul@localhost;
 -- Limited Privileges
-
 GRANT SELECT,UPDATE,INSERT ON *.* TO rahul@localhost;
 ```
 
@@ -421,7 +420,7 @@ INSERT duplicate_table SELECT * FROM original_table;
 - There are following advantages of view in MySQL:-
   - **Simplify complex query**
   - **Increases the Re-usability**
-  - **Help in Data Security** - Allows us to show only authorized information to the users and hide essential data.
+  - **Help in Data Security** - Allows us to show only authorized information to an user and hide essential data.
   - **Enable Backward Compatibility**
 
 #### Create view
@@ -439,6 +438,18 @@ CREATE OR REPLACE VIEW users_below_25 AS SELECT * FROM users;
 
 #### Show view
 
+- Shows all views in a database.
+- **Syntax**
+
+```sql
+-- Views in Current Database
+SHOW FULL TABLES WHERE table_type='VIEW';
+-- Views in any database
+SHOW FULL TABLES [{FROM | IN} database_name] WHERE table_type='VIEW';
+-- Views based a pattern
+SHOW FULL TABLES LIKE <pattern>;
+```
+
 #### Update view
 
 - **ALTER VIEW** statement is used to modify or update a view.
@@ -447,12 +458,12 @@ CREATE OR REPLACE VIEW users_below_25 AS SELECT * FROM users;
 -- Syntax
 ALTER VIEW view_name AS SELECT columns FROM table_name WHERE conditions.
 -- Example
-ALTER VIEW users_below 25 as SELECT fullname,username,age FROM users;
+ALTER VIEW users_below_25 as SELECT fullname,username,age FROM users;
 ```
 
 #### Drop view
 
-- **DROP VIEW** statement is used to drop existing VIEW.
+- **DROP VIEW** statement is used to drop an existing VIEW.
 
 ```sql
 -- Syntax
@@ -460,6 +471,54 @@ DROP VIEW [IF EXISTS] view_name;
 -- Exanple
 DROP VIEW IF EXISTS users_below_25;
 ```
+
+## MySQL Queries
+
+### MySQL Constraints
+
+- Constraint is used to specify the rule which allows/restricts what values/data will be stored in the table.
+- In MySQL, Constraints are classified into two types:-
+
+  1. **Column Level Constraints**
+  1. **Table Level Constraints**
+
+- Most common Constraints used in MySQL are:-
+
+  - NOT NULL
+  - CHECK
+  - DEFAULT
+  - PRIMARY KEY - Can't be empty or null
+  - AUTO_INCREMENT - Used for primary key field to generate unique number for a new record.
+  - UNIQUE
+  - INDEX
+  - ENUM
+  - FOREIGN KEY
+
+- **CHECK** constraint controls the value in a particular columns and ensures that the inserted value must be satisfied with the given condition.
+
+```sql
+-- Syntax
+[CONSTRAINT [symbol]] CHECK (expr) [[NOT] ENFORCED];
+-- Example
+CREATE TABLE users(
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  age TINYINT UNSIGNED NOT NULL CHECK(age >= 18),
+  PRIMARY KEY(id)
+);
+```
+
+- **ENUM** constraint allows us to limit the value chosen from a list of permitted values in the column specification at time of table creation. It uses numeric indexes to represent string values.
+
+```sql
+--Example
+CREATE TABLE Tshirts(
+  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  shirt_type ENUM('round','polo','v-shape') NOT NULL,
+  brand VARCHAR(50) NOT NULL UNIQUE
+);
+```
+
+- **INDEX** constraint
 
 ## MySQL Keys
 
