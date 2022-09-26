@@ -169,23 +169,50 @@ SELECT @@version;
 ```sql
 -- Syntax for Creating new user(account_name --> <username>@<hostname> || <username>@%)
 CREATE USER [IF NOT EXISTS] account_name IDENTIFIED BY 'password';
--- Syntax for granting privileges
-GRANT <privilege> ON *.* TO account_name;
-
--- Examples
+-- Example
 CREATE USER rahul@localhost IDENTIFIED BY 'rahulkumar124';
-GRANT ALL PRIVILEGES ON *.* TO rahul@localhost;
--- Limited Privileges
-GRANT SELECT,UPDATE,INSERT ON *.* TO rahul@localhost;
 ```
 
-- To check for existing privileges of an user,
+- To grant privileges
+
+```sql
+-- Syntax
+GRANT <privilege(s)> ON [object_type] priv_level TO account_name;
+-- Examples
+GRANT ALL ON *.* TO rahul@localhost;
+GRANT ALL ON cli_tools.* TO rahul@localhost;
+GRANT SELECT,UPDATE,INSERT ON *.* TO rahul@localhost;
+GRANT SELECT,VIEW ON cli_tools.* TO rahul@localhost;
+GRANT SELECT,UPDATE,DELETE ON cli_tools.shells TO rahul@localhost;
+```
+
+> `priv_level`
+>
+> 1. \*
+> 1. \*.\*
+> 1. db_name.\*
+> 1. db_name.tbl_name
+> 1. tbl_name
+> 1. db_name.routine_name
+
+- To check for existing privileges of an user
 
 ```sql
 -- syntax
 SHOW GRANTS FOR username;
 -- Example
 SHOW GRANTS FOR rahul@localhost;
+```
+
+- To remove privileges of an user
+
+```sql
+-- Syntax
+REVOKE [IF EXISTS] priv_type ON [object_type] priv_level FROM account_name [IGNORE UNKNOWN USER];
+-- Examples
+REVOKE IF EXISTS SELECT, UPDATE ON *.* FROM rahulbaran@localhost;
+REVOKE ALL PRIVILEGES ON cli_tools.* FROM rahulbaran@localhost IGNORE UNKNOWN USER;
+REVOKE ALL ON cli_tools.* FROM rahulbaran@localhost;
 ```
 
 > `SELECT user FROM mysql.user;` returns all users in current MySQL server.
@@ -197,7 +224,6 @@ SHOW GRANTS FOR rahul@localhost;
 ```sql
 -- Syntax
 DROP USER account_name1,...,account_nameN;
-
 -- Example
 DROP USER rahul@localhost;
 DROP USER rahul@localhost, ram@localhost;
@@ -398,13 +424,12 @@ CREATE TABLE [IF NOT EXISTS] new_table_name SELECT col1, ..., colN FROM existing
 CREATE TABLE backup_users SELECT * FROM users;
 ```
 
-- The above command copies only the table & its data, not all the dependent objects of table (such as indexes, triggers, primary key constriants, foreign key constraints etc). To copy these objects, we use below command:-
+- The above command copies only the table & its data, not all the **dependent objects of table (such as indexes, triggers, primary key constriants, foreign key constraints etc)**. To copy these objects, we use below command:-
 
 ```sql
 -- Syntax
 CREATE TABLE IF NOT EXISTS new_table_name LIKE existing_table_name;
 INSERT new_table_name SELECT * FROM existing_table_name;
-
 -- Example
 CREATE TABLE duplicate_table LIKE original_table;
 INSERT duplicate_table SELECT * FROM original_table;
@@ -518,7 +543,36 @@ CREATE TABLE Tshirts(
 );
 ```
 
-- **INDEX** constraint
+- **INDEX** constraint is used to speed up data retrieval from database table. **CREATE INDEX** statement is used to create indexes in tables.
+
+```sql
+-- Syntax
+CREATE INDEX indexname ON tablename(col1);
+-- Example
+CREATE INDEX shell_name_index ON shells(shell_name);
+```
+
+### Insert Query
+
+- To insert a date in _mm/dd/yyyy_ format, below syntax is used:-
+
+```sql
+INSERT INTO table_name VALUES (STR_TO_DATE(date_value, format_specifier));
+```
+
+### Update Query
+
+- Syntax
+
+```sql
+UPDATE [LOW_PRIORITY] [IGNORE] table_name SET column_assigment_list [WHERE condition];
+```
+
+- **LOW_PRIORITY** - This modifier instructs the statement to delay the UPDATE command's execution until no other clients reading from the table. It takes effects only for the storage engines that use only table-level locking.
+- **IGNORE** - This modifier allows the statement to do not abort the execution even if errors occurred. If it finds duplicate-key conflicts, the rows are not updated.
+
+### Select Query
+- 
 
 ## MySQL Keys
 
@@ -581,14 +635,14 @@ ON UPDATE referenceOption;
 
 ```sql
 CREATE TABLE users(
-    user_id INT NOT NULL auto_increment,
-    username VARCHAR(255) NOT NULL UNIQUE COMMENT 'Username of Current User',
-    PRIMARY KEY(user_id)
+  user_id INT NOT NULL auto_increment,
+  username VARCHAR(255) NOT NULL UNIQUE COMMENT 'Username of Current User',
+  PRIMARY KEY(user_id)
 );
 
 CREATE TABLE posts(
-    post_id INT
-)
+  post_id INT
+);
 ```
 
 - To drop an existing **foreign key**, we use `ALTER TABLE` statement.
@@ -630,9 +684,9 @@ ALTER TABLE users COMMENT='Hello new table';
 
 ```sql
 CREATE TABLE users (
-    user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(40) NOT NULL,
-    username VARCHAR(20) NOT NULL UNIQUE COMMENT 'username'
+  user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(40) NOT NULL,
+  username VARCHAR(20) NOT NULL UNIQUE COMMENT 'username'
 );
 ```
 
