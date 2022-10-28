@@ -97,7 +97,7 @@
 
 - **SET** & **SELECT** statement are used to declare & initialize a variable.
 - It starts with **@** symbol & can be a maximum of **64 characters** in length.
-- variable can store data of types **integer, float, decimal, string** or **NULL**.
+- variable can store data of types **integer, float, decimal, string** & **NULL**.
 - **Syntax**
 
 ```sql
@@ -115,7 +115,7 @@ SELECT @name:='Rahul Kumar';
 SELECT @name;
 ```
 
-> Accessing **undeclared** variable will give **NULL** output.
+> **Note**: Accessing **undeclared** variable will give **NULL** output.
 
 #### Local Variable
 
@@ -215,7 +215,7 @@ REVOKE ALL PRIVILEGES ON cli_tools.* FROM rahulbaran@localhost IGNORE UNKNOWN US
 REVOKE ALL ON cli_tools.* FROM rahulbaran@localhost;
 ```
 
-> `SELECT user FROM mysql.user;` returns all users in current MySQL server.
+> **Note**: `SELECT user FROM mysql.user;` returns all users in current MySQL server.
 
 #### Drop User
 
@@ -275,7 +275,7 @@ CREATE DATABASE [IF NOT EXISTS] database_name [CHARACTER SET charset_name] [COLL
 CREATE DATABASE college CHARACTER SET utf8mb4;
 ```
 
-> `SHOW CHARACTER SET;` returns all the character set available.
+> **Note**: `SHOW CHARACTER SET;` returns all the character set available.
 > `SELECT schema_name FROM information_schema.schemata;` returns all the schema available in current mysql server.
 
 ### Drop Database
@@ -331,12 +331,13 @@ ALTER TABLE table_name CHANGE COLUMN old_name new_name
 column_definition [FIRST|AFTER column_name];
 -- RENAME Statement Syntax
 ALTER TABLE table_name RENAME COLUMN old_column_name TO new_column_name;
+
 -- Example
 ALTER TABLE players CHANGE COLUMN age player_age TINYINT UNSIGNED NOT NULL;
 ALTER TABLE players RENAME COLUMN player_age TO age;
 ```
 
-> We can rename multiple columns at once.
+> **Note**: We can rename multiple columns at once.
 
 #### Rename table
 
@@ -410,7 +411,7 @@ DROP TEMPORARY TABLE table_name;
 DROP TEMPORARY TABLE members;
 ```
 
-> `SELECT * FROM information_schema.innodb_temp_table_info\G;` command outputs all the temporary table created.
+> **Note**: `SELECT * FROM information_schema.innodb_temp_table_info\G;` command outputs all the temporary table created.
 
 ### Copy/Clone/Duplicate Table
 
@@ -572,11 +573,18 @@ UPDATE [LOW_PRIORITY] [IGNORE] table_name SET column_assigment_list [WHERE condi
 - **IGNORE** - This modifier allows the statement to do not abort the execution even if errors occurred. If it finds duplicate-key conflicts, the rows are not updated.
 
 ### Select Query
-- 
+
+- Used to fetch data from one or more tables.
+
+### Replace Query
+
+- Used to update records into the table.
+- If no matching value is found with the existing data row then a standart **INSERT** statement is performed.
+- If duplicate record is found, it will delete the existing row & add the new record in the table.
 
 ## MySQL Keys
 
-> `SHOW INDEX FROM table_name;`syntax is used to check keys associated with `table_name`.
+> **Note**: `SHOW INDEX FROM table_name;`syntax is used to check keys associated with `table_name`.
 
 #### Unique Key
 
