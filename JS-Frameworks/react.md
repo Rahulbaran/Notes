@@ -65,7 +65,8 @@ const FooterComponent = function () {
 
 - When React sees an element representing a user-defined component, it passes JSX attributes & children to this component as a single object. The object is known as **props**(properties).
 - **props** make a component more reusable(we can call it whatever we want).
-- Since it is an object so we can destructure it.
+- **props** is an object so we can destructure it.
+- **props** is immutable, which means a component receiving it, is not allowed to modify it.
 
 ```jsx
 const city = "Ranchi";
@@ -119,7 +120,7 @@ function Card(props) {
 }
 ```
 
-#### Inline If with Logical `&&` Operator
+#### Inline `if` with Logical `&&` Operator
 
 - We can embed logical `&&` operator with JSX by wrapping them in curly braces.
 
@@ -166,4 +167,77 @@ function Footer(props) {
 ```
 
 - **props** can be given a default value.
-- Anything can be passed as a **prop** in React.
+- Anything can be passed as **props** in React.
+
+## Lists & Keys
+
+- We use JavaScript's `map()` method to create an array of components.
+- **Keys** help React identify which items have changed, are added or are removed.
+- **Keys** should be given to the elements inside the array to give the elements a stable identity & they must be unique among siblings.
+
+```js
+const names = ["Rahul Kumar", "Rohit Kumar", "Ganesh Mahto", "Chulbuli"];
+
+function Card(props) {
+  return (
+    <div className="card" key={props.id}>
+      <h3>{props.name}</h3>
+    </div>
+  );
+}
+const cardComponents = names.map(data => {
+  return <Card name={data.name} id={data.id} />;
+});
+
+<React.StrictMode>
+  <main className="cards">{cardComponents}</main>
+</React.StrictMode>;
+```
+
+## Handling Events
+
+- handling events with React elements are very similar to handling events with DOM elements(JavaScript).
+- React events are named using **camelCase** & with JSX, we pass a function as the event handler.
+
+```js
+// In HTML
+<button onclick="eventHandler()">Click Here</button>
+// IN React
+<button onClick={eventHandler}>Click Here</button>
+```
+
+- In React elements, we can't return `false` to prevent default behavior, we need to control `preventDefault` explicitly.
+
+```js
+// In HTML
+<form onsubmit="console.log('You clicked submit button');return false">
+  <button type="submit">Submit</button>
+</form>;
+
+// In React
+function Form() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("You clicked submit button");
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+## State & Lifecycle
+
+- **state** refers to the values that are managed by the component, similar to variables declared inside a function.
+- Whenever we have changing values that should be saved/displayed, We use **state**.
+
+> Intially **state** feature could be accessed via class but now we have **state Hook**, which makes a lot simplier to use it.
+
+## Hooks
+
+### Using the state Hook
+
+- Hooks let you use **state** and other React features without writing a class.
