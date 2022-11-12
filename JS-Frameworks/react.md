@@ -1,25 +1,25 @@
 # React
 
-- It is declarative which means it does whatever we say to do.
-- React is **composable**, which means we can create small components(custom/user-defined components) and then can put them together to create a complete app.
+- It is declarative which means it does whatever we say it to do.
+- React is **composable**, which means we can create multiple small components(custom/user-defined components) and then can put them together to create a complete app.
 - React component is simply a function which returns React element and it is reusable.
 - React element is a javascript object which is obtained when we return jsx code.
-- We can use fragement `<></>` to wrap component code inside it.
+- We can use fragement `<></>` to wrap components inside it.
 
 ```js
 import React from "react";
 import ReactDOM from "react-dom/client";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
+  <React.StrictMode>
     <header className="header">
       <h1>Header component</h1>
     </header>
-  </>
+  </React.StrictMode>
 );
 ```
 
-- JSX Code should be nested inside a single parent.
+- JSX Code(components) should be nested inside a single parent.
 
 ```js
 const HeaderComponent = function () {
@@ -47,7 +47,7 @@ ReactDOM.createRoot(document.querySelector("#root")).render(
 );
 ```
 
-- We have to use **PascalCase**(Capitalize first character on each word) instead of **CamelCase** to name a function returning a particular component.
+- We have to use **PascalCase**(Capitalize first character of each word) instead of **CamelCase** to name a function returning a component.
 
 ```js
 const FooterComponent = function () {
@@ -64,7 +64,7 @@ const FooterComponent = function () {
 ## Props
 
 - When React sees an element representing a user-defined component, it passes JSX attributes & children to this component as a single object. The object is known as **props**(properties).
-- **props** make a component more reusable(we can call it whatever we want).
+- **props** make a component more reusable(we can name it whatever we want).
 - **props** is an object so we can destructure it.
 - **props** is immutable, which means a component receiving it, is not allowed to modify it.
 
@@ -91,7 +91,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 ```
 
-- **props** are Read-Only.
+- **props** is Read-Only.
 - We can't pass **props** to a native HTML tag.
 
 ```jsx
@@ -154,7 +154,7 @@ function HeroSection(props) {
 
 ### Passing React component as props
 
-- We can pass react components as **props**.
+- We can pass react components also as **props**.
 
 ```js
 function Footer(props) {
@@ -185,12 +185,12 @@ function Card(props) {
     </div>
   );
 }
-const cardComponents = names.map(data => {
+const cards = names.map(data => {
   return <Card name={data.name} id={data.id} />;
 });
 
 <React.StrictMode>
-  <main className="cards">{cardComponents}</main>
+  <main className="cards--container">{cards}</main>
 </React.StrictMode>;
 ```
 
@@ -200,9 +200,13 @@ const cardComponents = names.map(data => {
 - React events are named using **camelCase** & with JSX, we pass a function as the event handler.
 
 ```js
+function eventHandler() {
+  return 'Hello Ji';
+}
+
 // In HTML
 <button onclick="eventHandler()">Click Here</button>
-// IN React
+// In React
 <button onClick={eventHandler}>Click Here</button>
 ```
 
@@ -231,10 +235,33 @@ function Form() {
 
 ## State & Lifecycle
 
-- **state** refers to the values that are managed by the component, similar to variables declared inside a function.
+- **state** refers to the values which are managed by the component, similar to variables declared inside a function.
 - Whenever we have changing values that should be saved/displayed, We use **state**.
+- **state** is mutable.
+- Whenever we need the old value of **state** to determine the new value of **state**, we should pass a callback function to our _state setter function_ instead of using **state** directly. This callback will receive the old value of **state** as its parameter which we can then use to determine our new value of **state**.
 
-> Intially **state** feature could be accessed via class but now we have **state Hook**, which makes a lot simplier to use it.
+```js
+import { useState } from "react";
+
+export default function Counter() {
+  const [counterValue, setCounter] = useState(0);
+  const increment = () => setCounter(val => val + 1);
+
+  return (
+    <div className="counter">
+      <h2>{counterValue}</h2>
+
+      <div className="counter-btns">
+        <button className="counter-btn increment-btn" onClick={increment}>
+          +
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+> Intially **state** feature could be accessed via class but now we have **state Hook**, which makes it a lot simplier to use Hook.
 
 ## Hooks
 
