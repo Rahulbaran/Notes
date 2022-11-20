@@ -1,10 +1,13 @@
 # React
 
 - It is declarative which means it does whatever we say it to do.
-- React is **composable**, which means we can create multiple small components(custom/user-defined components) and then can put them together to create a complete app.
+- React is **composable**, which means we can create multiple small components(custom/user-defined components) and then can invoke one/more component(s) in another component.
 - React component is simply a function which returns React element and it is reusable.
 - React element is a javascript object which is obtained when we return jsx code.
 - We can use fragement `<></>` to wrap components inside it.
+- Components in React can be **stateful** or **stateless**.
+  - **stateful** - a component which declares & manages _local state_
+  - **stateless** - a component which does not have any _local state_ & side-effects to manage, which means it is a pure function.
 
 ```js
 import React from "react";
@@ -91,7 +94,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 ```
 
-- **props** is Read-Only.
+- Data from **props** is _read-Only_.
 - We can't pass **props** to a native HTML tag.
 
 ```jsx
@@ -235,7 +238,7 @@ function Form() {
 
 ## State & Lifecycle
 
-- **state** refers to the values which are managed by the component, similar to variables declared inside a function.
+- **state** refers to the values which are managed by the component & it is private to the component, similar to variables declared inside a function.
 - Whenever we have changing values that should be saved/displayed, We use **state**.
 - **state** is mutable.
 - Whenever we need the old value of **state** to determine the new value of **state**, we should pass a callback function to our _state setter function_ instead of using **state** directly. This callback will receive the old value of **state** as its parameter which we can then use to determine our new value of **state**.
@@ -263,7 +266,157 @@ export default function Counter() {
 
 > Intially **state** feature could be accessed via class but now we have **state Hook**, which makes it a lot simplier to use Hook.
 
+- When, we use object as **state** and want to change state any property then we need to mention other properties also.
+
+```js
+function App() {
+  const [info, setInfo] = useState({
+    name: "Rahul Kumar",
+    age: 26,
+    isMarried: false
+  });
+
+  const toggleState = () => {
+    setInfo(prev => {
+      return {
+        ...prev,
+        isMarried: !prev.isMarried
+      };
+    });
+  };
+
+  return (
+    <div>
+      <h1>{info.name}</h1>
+      <h2>{info.age}</h2>
+
+      <span>
+        {info.name} {info.isMarried ? "is married" : "is not married"}
+      </span>
+
+      <button onClick={toggleState}>Toggle</button>
+    </div>
+  );
+}
+```
+
+- We can also pass **state** as **props** in a component.
+
+```js
+import { useState }, React from "react";
+import ReactDOM  from "react-dom/client";
+
+function Card(props) {
+  return (
+    <div className="card">
+      <h2>{props.title}</h2>
+      <p>{props.content}</p>
+    </div>
+  );
+}
+
+function App() {
+  const [card, setCard] = useState({
+    title: "Sonam is my love",
+    content: "Let's find out who is Sonam and what she does"
+  });
+
+  const changeCard = () => {
+    setCard({
+      title: "Sundar is great",
+      content: "I am Rahul Kumar Baranwal from India"
+    })
+  }
+
+  return (<>
+    <Card title={card.title} content={card.content}/>
+    <button onDoubleClick={changeCard}>change card</button>
+  </>)
+}
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+```
+
+- We can also pass a _state setter function_ to Child component.
+
+```js
+import { useState } from "react";
+
+const Text = function (props) {
+  return (
+    <div className="container">
+      <h1>
+        {props.heading} {props.bool}
+      </h1>
+      <button onClick={props.toggleText}>Toggle</button>
+    </div>
+  );
+};
+
+const App = () => {
+  const [obj, setObj] = useState({
+    heading: `Hello value ---> `,
+    bool: true
+  });
+
+  const toggleText = () => {
+    setObj(obj => ({ ...obj, bool: !obj.bool }));
+  };
+
+  // Passing state setter function "toggleText"
+  return (
+    <>
+      <Text heading={obj.heading} toggleText={toggleText} />
+    </>
+  );
+};
+```
+
+> We should keep state as local(close) as possible with a component.
+
+#### Derived State management
+
+- When we create a new **state** using the **props** coming from another **state**, then it is called **Derived State**.
+
+```js
+import { useState } from "react";
+import boxesData from "./boxesData";
+
+// Here we are using props coming from another state to create a new state
+function Box(props) {
+  const [boxOn, setBoxOn] = useState(props.on);
+  const toggleBool = () => setBoxOn(val => !val);
+
+  const styles = {
+    backgroundColor: boxOn ? "hwb(250 30% 0%/.75)" : "transparent"
+  };
+  return <div className="box" style={styles} onClick={toggleBool}></div>;
+}
+
+const App = () => {
+  const [boxes, _] = useState(boxesData);
+  const boxComponents = boxes.map(box => <Box key={box.id} on={box.on} />);
+
+  return (
+    <>
+      <h1>Boxes will be here</h1>
+      <main>{boxComponents}</main>
+    </>
+  );
+};
+```
+
+#### Unified State management
+
 ## Hooks
+
+- Hooks are JavaScript functions that manage the state's behaviour & side effects by isolating them from a functional component.
 
 ### Using the state Hook
 
