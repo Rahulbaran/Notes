@@ -293,11 +293,11 @@ CREATE DATABASE college CHARACTER SET utf8mb4;
 - **ALTER** statement is used for adding,deleting & modifying a table or any table field.
 - The statement is always used with **ADD**, **DROP** & **MODIFY** commands.
 
-#### ADD column(s)
+#### Add column(s)
 
 ```sql
 -- Syntax
--- FIRST | AFTER columns_name tells MySQL position of column
+-- FIRST | AFTER columns_name tells MySQL about the position of column
 ALTER TABLE table_name ADD new_column_name column_definition [FIRST|AFTER column_name], ADD new_column_name column_definition [FIRST|AFTER column_name], ... ;
 -- Example
 ALTER TABLE players ADD player_name VARCHAR(255) NOT NULL FIRST, ADD age TINYINT UNSIGNED NOT NULL COMMENT 'Player Age' AFTER id;
