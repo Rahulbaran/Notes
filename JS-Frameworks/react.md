@@ -414,10 +414,83 @@ const App = () => {
 
 #### Unified State management
 
+## Forms
+
+- In React, **textarea** behaves similar to **input** form control (**text, email and number**).
+
+#### Controlled Components
+
+- Those components in which form data is handled by the **component's state**.
+- These are predictable since the state of the form elements is handled by the component.
+- These enable us to effectively employ form validation to our forms.
+
+```js
+function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  function onSubmit() {
+    console.log("Name value: " + name);
+    console.log("Email value: " + email);
+  }
+
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={e => setName(e.target.value)}
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        required
+      />
+      <input type="submit" value="Submit" />
+    </form>
+  );
+}
+```
+
+#### Uncontrolled Components
+
+- Those components are those for which the form data is handled by the **DOM** itself.
+- The values of the form elements are traditionally controlled by & stored on the **DOM**.
+- These components are not predictable since during the lifecycle of a component, the form elements can lose their reference & may be changed/affected by other sources.
+
+```js
+function App() {
+  const nameRef = useRef();
+  const emailRef = useRef();
+
+  function onSubmit() {
+    console.log("Name value: " + nameRef.current.value);
+    console.log("Email value: " + emailRef.current.value);
+  }
+  return (
+    <form onSubmit={onSubmit}>
+      <input type="text" name="name" ref={nameRef} required />
+      <input type="email" name="email" ref={emailRef} required />
+      <input type="submit" value="Submit" />
+    </form>
+  );
+}
+```
+
 ## Hooks
 
 - Hooks are JavaScript functions that manage the state's behaviour & side effects by isolating them from a functional component.
 
-### Using the state Hook
+### Using the state Hooks
 
-- Hooks let you use **state** and other React features without writing a class.
+- Hooks let you use **state** and other React features without _writing a class_.
+
+#### useState()
+
+#### useRef()
+
+#### useEffect()
