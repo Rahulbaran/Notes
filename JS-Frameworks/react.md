@@ -491,6 +491,8 @@ function App() {
 
 #### useState()
 
+- The **useState** hook takes an initial value and returns a stateful value and a function to update it.
+
 #### useRef()
 
 #### useEffect()
