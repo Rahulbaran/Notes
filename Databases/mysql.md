@@ -520,7 +520,9 @@ DROP VIEW IF EXISTS users_below_25;
   - ENUM
   - FOREIGN KEY
 
-- **CHECK** constraint controls the value in a particular columns and ensures that the inserted value must be satisfied with the given condition.
+#### CHECK Constraint
+
+- It controls the value in a particular columns and ensures that the inserted value must be satisfied with the given condition.
 
 ```sql
 -- Syntax
@@ -533,7 +535,9 @@ CREATE TABLE users(
 );
 ```
 
-- **ENUM** constraint allows us to limit the value chosen from a list of permitted values in the column specification at time of table creation. It uses numeric indexes to represent string values.
+#### ENUM Constraint
+
+- It allows us to limit the value chosen from a list of permitted values in the column specification at time of table creation. It uses numeric indexes to represent string values.
 
 ```sql
 --Example
@@ -544,13 +548,35 @@ CREATE TABLE Tshirts(
 );
 ```
 
-- **INDEX** constraint is used to speed up data retrieval from database table. **CREATE INDEX** statement is used to create indexes in tables.
+#### INDEX Constraint
+
+- It is used to speed up data retrieval from database table.
+- There are multiple ways to create a index:-
+
+##### 1. Using CREATE INDEX Statement
 
 ```sql
 -- Syntax
-CREATE INDEX indexname ON tablename(col1);
+CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name ON tablename(col1, ...) ;
 -- Example
 CREATE INDEX shell_name_index ON shells(shell_name);
+```
+
+##### 2. Using ALTER TABLE Statement
+
+```sql
+ALTER TABLE table_name ADD [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name (col1, ...);
+-- Example
+ALTER TABLE users ADD UNIQUE INDEX un_index (username);
+```
+
+##### 3. Using CREATE TABLE Statement
+
+```sql
+CREATE TABLE tbl (
+  col1 LONGTEXT,
+  INDEX idx1 ((SUBSTRING(col1, 1, 10)))
+);
 ```
 
 ### Insert Query
