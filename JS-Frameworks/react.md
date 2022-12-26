@@ -483,15 +483,16 @@ function App() {
 
 ## Hooks
 
-- Hooks are JavaScript functions that manage the state's behaviour & side effects by isolating them from a functional component.
+- Hooks are JavaScript functions that manage the state's behaviour, side effects and other React features by isolating them from a functional component.
+- They are used inside a functional component.
+- Hooks let you use **state** and other React features without _writing a class_.
 
 ### Using the state Hooks
 
-- Hooks let you use **state** and other React features without _writing a class_.
-
 #### useState()
 
-- The **useState** hook takes an initial value and returns a stateful value and a function to update it.
+- The **useState** hook takes an initial value and returns a stateful value and a function to update it(_state setter function_).
+- _State setter function_ runs **asynchronously**.
 
 #### useRef()
 
