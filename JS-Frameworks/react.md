@@ -497,3 +497,15 @@ function App() {
 #### useRef()
 
 #### useEffect()
+
+## Routing in React
+
+### Link Component
+
+### Error Pages
+
+### Nested Pages
+
+### Shared Layout
+
+### Index Layout
