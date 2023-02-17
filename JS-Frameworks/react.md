@@ -483,7 +483,7 @@ function App() {
 
 ## Hooks
 
-- Hooks are JavaScript functions that manage the state's behaviour, side effects and other React features by isolating them from a functional component.
+- Hooks are special JavaScript functions in React which manage the state's behaviour, side effects and its other features by isolating them from a _functional component_.
 - They are used inside a functional component.
 - Hooks let you use **state** and other React features without _writing a class_.
 
@@ -491,21 +491,75 @@ function App() {
 
 #### useState()
 
-- The **useState** hook takes an initial value and returns a stateful value and a function to update it(_state setter function_).
+- The **useState** hook takes an initial value and returns an array containing a stateful value and a function to update the value(_state setter function_).
+- _State setter function_ updates the value as well as enques a re-rendering of the component.
 - _State setter function_ runs **asynchronously**.
+
+```js
+import { useState } from "react";
+
+export default function App() {
+  const [num, setNum] = useState(0);
+  return (
+    <>
+      <div className="container">
+        <p>{num}</p>
+        <button onClick={() => setNum(prev => ++prev)}>Increase</button>
+      </div>
+    </>
+  );
+}
+```
+
+- Each component in React maintains its own state independently.
+
+```js
+import {useState} from "react";
+
+const Counter = () => {
+  const [num, setNum] = useState(0);
+  return (
+    <div className="counter-container">
+      <p>{num}</p>
+      <button onClick={() => setNum(prev => ++prev)}>Increase</button>
+    </div>
+  );
+};
+
+// Each of the Counter component is maintaining its own state independently without affecting others.
+export default const App = () => {
+  return (
+    <>
+      <Counter />
+      <Counter />
+      <Counter />
+    </>
+  );
+};
+```
+
+- Along with primitive and non-primitive data types, we can also pass a function inside `useState()`.
+
+```js
+import { useState } from "react";
+
+export default function App() {
+  const [val, setVal] = useState(() => 5 + 5 + 2);
+  return (
+    <div className="wrapper">
+      <h4>{val}</h4>
+    </div>
+  );
+}
+```
+
+#### useReducer()
+- It is similar to `useState()`, but with the ability to maintain more complex states.
+
+#### useMemo()
+
+#### useCallback()
 
 #### useRef()
 
 #### useEffect()
-
-## Routing in React
-
-### Link Component
-
-### Error Pages
-
-### Nested Pages
-
-### Shared Layout
-
-### Index Layout
