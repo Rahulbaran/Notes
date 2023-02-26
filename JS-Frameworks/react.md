@@ -554,7 +554,109 @@ export default function App() {
 ```
 
 #### useReducer()
-- It is similar to `useState()`, but with the ability to maintain more complex states.
+
+- It is similar to `useState()`, but with the ability to maintain complex states and lets you _move the state update logic_ from event handlers into a single function outside of your component.
+- We can not call it inside **loops or conditions**.
+- **Syntax**
+
+```js
+const [state, dispatch] = useReducer(reducer, initialArg, init?)
+```
+
+##### Paremeters
+
+- `reducer`: It specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. **State and action can be of any types**.
+- `initialArg`: The value from which the initial state is calculated. It can be **a value of any type**. How the initial state is calculated from it depends on the next `init` argument.
+- `init`(optional): The initializer function that specifies how the initial state is calculated. If it’s not specified, the initial state is set to `initialArg`. Otherwise, the initial state is set to the result of calling `init(initialArg)`.
+
+##### Returns
+
+- It returns an array with exactly two values:-
+
+  1. The current state
+  2. `dispatch` function takes `action` parameter as an object with a `type` & lets us **update the state to a different value & trigger a re-render**.
+
+- **Examples**
+
+```js
+import { useReducer } from "react";
+
+// BASIC EXAMPLE
+function reducer(state, action) {
+  if (action.type === "incremented_age") {
+    return {
+      age: state.age + 1
+    };
+  }
+  throw Error("Unknown action.");
+}
+
+export default function Counter() {
+  const [state, dispatch] = useReducer(reducer, { age: 42 });
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          dispatch({ type: "incremented_age" });
+        }}
+      >
+        Increment age
+      </button>
+      <p>Hello! You are {state.age}.</p>
+    </>
+  );
+}
+
+// COMPLEX EXAMPLE
+function reducerFunc(state, action) {
+  switch (action.type) {
+    case 'incremented_age': {
+      return {
+        name: state.name,
+        age: state.age + 1
+      };
+    }
+    case 'changed_name': {
+      return {
+        name: action.nextName,
+        age: state.age
+      };
+    }
+  }
+  throw Error('Unknown action: ' + action.type);
+}
+
+const initialState = { name: 'Taylor', age: 42 };
+
+export default function Form() {
+  const [state, dispatch] = useReducer(reducerFunc, initialState);
+
+  function handleButtonClick() {
+    dispatch({ type: 'incremented_age' });
+  }
+
+  function handleInputChange(e) {
+    dispatch({
+      type: 'changed_name',
+      nextName: e.target.value
+    });
+  }
+
+  return (
+    <>
+      <input
+        value={state.name}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleButtonClick}>
+        Increment age
+      </button>
+      <p>Hello, {state.name}. You are {state.age}.</p>
+    </>
+  );
+}
+```
 
 #### useMemo()
 
