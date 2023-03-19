@@ -8,6 +8,7 @@
 - Components in React can be **stateful** or **stateless**.
   - **stateful** - a component which declares & manages _local state_
   - **stateless** - a component which does not have any _local state_ & side-effects to manage, which means it is a pure function.
+- All the values like `props`, `state`, other variables and functions declared inside a component are known as **reactive values**.
 
 ```js
 import React from "react";
@@ -62,6 +63,29 @@ const FooterComponent = function () {
     </>
   );
 };
+```
+
+- `React.Fragment` is a React component that exists purely to solve the problem of returning **multiple top-level elements**. It allows us to bundle up these elements without affecting the DOM.
+
+```js
+function LabeledInput({ id, label, ...delegated }) {
+  return (
+    <>
+      <label htmlFor={id}>{label}</label>
+      <input {...delegated} />
+    </>
+  );
+}
+
+// We can also use this syntax
+function LabeledInput({ id, label, ...delegated }) {
+  return (
+    <React.Fragment>
+      <label htmlFor={id}>{label}</label>
+      <input {...delegated} />
+    </React.Fragment>
+  );
+}
 ```
 
 ## Props
@@ -486,6 +510,7 @@ function App() {
 - Hooks are special JavaScript functions in React which manage the state's behaviour, side effects and its other features by isolating them from a _functional component_.
 - They are used inside a functional component.
 - Hooks let you use **state** and other React features without _writing a class_.
+- Hooks can only be used **at the top level of a component**. It can't be used inside loops or conditions.
 
 ### Using the state Hooks
 
@@ -493,7 +518,6 @@ function App() {
 
 - The **useState** hook takes an initial value and returns an array containing a stateful value and a function to update the value(_state setter function_).
 - _State setter function_ updates the value as well as enques a re-rendering of the component.
-- _State setter function_ runs **asynchronously**.
 
 ```js
 import { useState } from "react";
@@ -550,6 +574,20 @@ export default function App() {
       <h4>{val}</h4>
     </div>
   );
+}
+```
+
+> _State setter function_ runs **asynchronously**, that's why when we access state after changing it then the previous value is obtained instead of current value.
+
+```js
+const [num, setNum] = useState(0);
+const numIncrement = function () {
+  setNum(num + 1); // 1, 2, 3, 4
+  console.log(num); // 0, 1, 2, 3
+};
+
+export default function Counter() {
+  return <button onClick={numIncrement}>{num}</button>;
 }
 ```
 
@@ -664,7 +702,9 @@ export default function Form() {
 #### useMemo()
 
 - It allows us to **memoize expensive functions** so that we can avoid calling them on every render.
-- It takes **a function** & **an array of inputs(dependency array)** as parameters.
+- It caches the result of a calculation between re-renders.
+- It takes **a function** & **a list of arrays(dependencies)** as parameters.
+- Caching return values like this is also known as **memoization**, that's why the hook is called `useMemo`.
 - **Syntax**
 
 ```js
@@ -700,5 +740,32 @@ export default function Counter() {
 #### useRef()
 
 #### useEffect()
+
+- It lets us **synchronize a component with an external system** which means it is used to manage _side effects_ inside components.
+- **`useEffect` “delays” a piece of code from running until that render is reflected on the screen.**
+- **Syntax**
+
+```js
+import {useEffect} from "react";
+
+useEffect(setup, dependencies?);
+```
+
+##### Parameters
+
+- `setup`: function with effect's logic. Optionally, It can return a _cleanup_ function.
+- `dependencies`(optional): A list of all reactive values referenced inside of the `setup` code. Omitting this paramter will cause the effect to re-run after every re-render of the component.
+
+> Effects run as a result of rendering. Setting state triggers rendering. Setting state immediately in an Effect is like plugging a power outlet into itself. The Effect runs, it sets the state, which causes a re-render, which causes the Effect to run, it sets the state again, this causes another re-render, and so on.
+
+```js
+import { useState, useEffect } from "react";
+
+// Infinite loop
+const [count, setCount] = useState(0);
+useEffect(() => {
+  setCount(count + 1);
+});
+```
 
 #### useContext()
