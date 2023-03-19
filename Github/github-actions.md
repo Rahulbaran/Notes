@@ -14,6 +14,7 @@
 #### Events
 
 - An event is a specific activity in a repository that triggers a workflow run.
+- Some general events are ---> **pull_request, public, push, pull_request_review, schedule, release, status, workflow_dispatch, issues, label, issue_comment, fork, deployment, deployment_status, discussion, create, delete, discussion**
 
 #### Jobs
 
@@ -24,6 +25,7 @@
 #### Actions
 
 - An action is a custom application for the GitHub Actions platform that performs a complex but frequently repeated task.
+- A reusable unit of code.
 
 #### Runners
 
@@ -38,15 +40,18 @@
 ```yaml
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on: issues:
+      types: [opened]
+    push:
 jobs:
-  check-bats-version:
+  check-netlify-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - run: npm install -g bats
-      - run: bats -v
+          node-version: "16"
+      - run: npm install -g netlify-cli
+      - run: netlify -v
+      - run: echo "The status of job is ${{ job.status }}"
 ```
