@@ -199,11 +199,19 @@ function Footer(props) {
 ## Lists & Keys
 
 - We use JavaScript's `map()` method to create an array of components.
-- **Keys** help React identify which items have changed, are added or are removed.
+- **Keys** help React identify which items have changed or are added or are removed.
+- **Keys** also _preserve internal state of a component_.
 - **Keys** should be given to the elements inside the array to give the elements a stable identity & they must be unique among siblings.
+- **Keys** should be stable and unique, which means they should not change while rerendering a component.
+- Using **Keys** in a wrong way can _negatively impact performance_.
 
 ```js
-const names = ["Rahul Kumar", "Rohit Kumar", "Ganesh Mahto", "Chulbuli"];
+const names = [
+  { id: 1, name: "Rahul Kumar" },
+  { id: 2, name: "Rohit Kumar" },
+  { id: 3, name: "Ganesh Mahto" },
+  { id: 4, name: "Chulbuli" }
+];
 
 function Card(props) {
   return (
@@ -220,6 +228,8 @@ const cards = names.map(data => {
   <main className="cards--container">{cards}</main>
 </React.StrictMode>;
 ```
+
+> We should not use indexes as keys because It can create problems if list of items is prone to change and can negatively impact our app performance.
 
 ## Handling Events
 
