@@ -98,6 +98,8 @@
 - `createServer` method is used to create a server.
 - There are built-in events like `request`, `close` etc. which are emitted by the `http` module itself, that's why we just have to use **event observers** for catching those events.
 
+> An **http header** is basically a piece of information sent as response for a request.
+
 ## url Module (built-in)
 
 - Used for url reading.
