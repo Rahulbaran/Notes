@@ -779,3 +779,26 @@ useEffect(() => {
 ```
 
 #### useContext()
+
+- _Context_ lets the parent component make some information available to any component in the tree below it(no matter how deep) without passing it explicitly through **props** (preventing **Prop Drilling**).
+- **Prop Drilling** is a situation where data is passed from one component through multiple interdependent components until you get to the component where the data is needed.
+- **useContext** lets us read and subscribe to **Context** from our component.
+- Corresponding `<Context.Provider>` **needs to be above** the component doing the `useContext()` call, since `useContext` never considers _providers_ in the same component where it is called.
+- **Syntax**
+
+```js
+import { useContext } from "react";
+
+function MyComponent() {
+  const theme = useContext(ThemeContext);
+  // ...
+}
+```
+
+##### Parameters
+
+- `SomeContext` which was previously created with `createContext`
+
+##### Returns
+
+- It returns the context value for the calling component, which is determined as the `value` passed to the closest `SomeContext.Provider` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` value passed in `createContext`.
