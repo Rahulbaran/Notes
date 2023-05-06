@@ -32,9 +32,7 @@
 - **IP** - Internet Protocol (Communication Protocol)
 - **HTTPS** - Data is encrypted using **SSL/TLS** Certificate
 - During the **DNS** lookup, Browser matches the Domain name with actual IP Address through **Internet Service Provider(ISP)**.
-
 - After **DNS** lookup, Browser makes a **TCP/IP Socket** Connection.
-
 - **TCP** is responsible for converting the data in thousands small chunks (packets) while making request/response and then reassembling these packets back to its original request/response.
 
 * **IP** is responsible for sending and routing the these data packets
@@ -72,65 +70,42 @@
 - Hitting `Tab` after mentioning a **construtor** will result all the methods associated with the prototype of that **constructor**.
 - There are things like reading file system,writing in files etc. which we can do using **nodejs** which is not possible in **browser** and `fs` module is used for this purpose.
 
-## fs module (built-in)
+- Event loop executes tasks in `process.nextTick queue` first, and then executes `promises microtask queue`, and then executes `macrotask queue(setImmediate, setTimeout etc)`.
 
-- There are various methods provided by the module which we can utilize to read,write,open,rename etc with a file.
+## Modules
 
-#### Synchronous Operations
-
-- **readFileSync()**
-- **writeFileSync()**
-- **renameSync()** >>> Rename a file and move into given path
-- **unlinkSync()** >>> To delete a file permanently
-
-#### Asynchronous Operations
-
-- **readFile()**
-- **writeFile()**
-- **rename()**
-- **unlink()**
-
-**NOTE :-** We can use asynchronous methods of `fs module` either by passing callbacks (will cause callback hell) or by importing the methods from `fs/promises` & then using `async/await` duo.
-
-## http Module (built-in)
-
-- Used to create a development server.
-- `createServer` method is used to create a server.
-- There are built-in events like `request`, `close` etc. which are emitted by the `http` module itself, that's why we just have to use **event observers** for catching those events.
+- Some of the **built-in** modules are `node:fs`, `node:http`, `node:url`, `node:events`, `node:process`, `crypto`, `events`
 
 > An **http header** is basically a piece of information sent as response for a request.
 
-## url Module (built-in)
-
-- Used for url reading.
-
-## slugify Module (third)
+### slugify Module (third)
 
 - Used for url reading.
 - slug is unique part of an url string
 
-## nodemon Module (third)
+### nodemon Module (third)
 
 - Used to restart server whenever any change is made in working directory.
 
-## events Module (built-in)
+### events Module (built-in)
 
 - The module is used to emit custom events and then listen (observe) to those events for executing callbacks.
+- There is also some third party modules like `EventEmitter2` & `EventEmitter3` which are way more efficient than built-in `events` module.
 
-## crypto Module (built-in)
+### crypto Module (built-in)
 
 - Used for cryptographic operations like encrypting data, comparing encrypted data with original data etc.
 
-## module Module (built-in)
+### module Module (built-in)
 
 - It gives the information about nodejs core modules
 
-## superagent Module (third party)
+### superagent Module (third party)
 
 - Used to make http request for fetching data.
 - Along with callback, it also supports `promises`.
 
-## Express Module (third party)
+### Express Module (third party)
 
 - a third party module to develop node application with easier syntaxes.
 - Automatically figures out `Content-Type` while making request.
@@ -172,13 +147,13 @@ app.use("/api/v1/tours", tourRouter);
 - There is a special variable known as **NODE_ENV**, which is used by many packages in **Express** but **Express** does not define this variable, So you have to set it manually.
 - **Environment Variables** for an app (node/flask/django) are set in `.env` or `config.env` file and they are accessed using a third party **dotenv**.
 
-## morgan Module (3rd Party)
+### morgan Module (3rd Party)
 
 - A **Middleware** used for _http request logging._
 - It gives access to `morgan()` function which takes two arguments **format** and **options**.
 - **format** - dev, common, combined, short, tiny
 
-## Mongoose Module (3rd Party)
+### Mongoose Module (3rd Party)
 
 - A **MongoDB** driver to connect NodeJS Applications with **MongoDB**
 - It is an **ODM(Object Documents Mapping)** for NodeJS.
@@ -203,11 +178,11 @@ await Tour.insertMany();
 
 - SchemaType **Array** is special because it implicitly has a default value of **[] (empty array)** and to overwrite this default value, set `default : undefined`.
 
-### Routing
+#### Routing
 
 - It is the path (url) through which user visit different pages of a website.
 
-### APIs
+#### APIs
 
 - Service from which we can retrieve data.
 - `__dirname` is used to retrieve current working directory.
@@ -217,7 +192,7 @@ await Tour.insertMany();
 - `PUT` and `PATCH` methods are used to update resources of an api. `PUT` is used to update whole the resources whereas `PATCH` is used to update a part of the resources.
 - There are many **Response Formatting** which are used to send **JSON** data from an API call and **JSend** is simplest in all of them.
 
-## General Terms
+### General Terms
 
 - **Streaming data** can cause _back pressure_ when data going on is not as fast as data coming. To avoid such situation, we need to use any tool to control coming data. In **NodeJS**, we use `pipe()` method for this which comes with every `Readable Stream`.
 - _back pressure_ can cause data loss/power exhaustation.
