@@ -2,6 +2,8 @@
 
 - These tricks are useful (many of these) in all the browsers or search engines.
 
+> `https://www.google.com/advanced_search` can be used for advance search query.
+
 ### Asking the Right Questions
 
 #### Be Thoughtful
@@ -64,4 +66,23 @@
 
 #### Source Operators
 
-> `https://www.google.com/advanced_search` can be used for advance search query.
+- **SITE/SEARCH:** (Search result in a particular site)
+- **EXT/FILETYPE:** (Search with a file type)
+- **SOURCE:**
+- **LOC/LOCATION:** (Search with a location)
+- **BLOGURL:** (Search blogs on a particular site)
+- **CACHE:**
+
+#### Boolean Operators
+
+- **AND(&&)**
+- **OR(/)** (Should be capitalize)
+
+#### IN-(URL/Title/Text/Anchor) Operators
+
+- **INURL/ALLINURL:**
+- **INTITLE/ALLINTITLE:**
+- **INTEXT/ALLINTEXT:**
+- **INANCHORE/ALLINANCHOR:**
+
+### Utility Operators
