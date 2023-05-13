@@ -1,6 +1,6 @@
 # [NodeJS]()
 
-- Node _REPL (Read-Eval-Print-Loop)_
+- _REPL(Read-Eval-Print-Loop)_
 - All the codes written inside a moudule is wrapped into a _REPL_ function as IIFE and paremeters like `require`,`__dirname`,`__filename`,`exports` & `module` are passed into it by JavaScript Runtime.
 - `arguments` is an object(array like object) in JavaScript, which contains only `length` & `index` properties.
 - NodeJS has been built **asynchronously**.
