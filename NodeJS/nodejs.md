@@ -1,8 +1,13 @@
 # [NodeJS]()
 
 - _REPL(Read-Eval-Print-Loop)_
-- All the codes written inside a moudule is wrapped into a _REPL_ function as IIFE and paremeters like `require`,`__dirname`,`__filename`,`exports` & `module` are passed into it by JavaScript Runtime.
-- `arguments` is an object(array like object) in JavaScript, which contains only `length` & `index` properties.
+- All the codes written inside a moudule is wrapped into a _REPL_ function as IIFE and paremeters like `exports`, `module`, `require`, `__filename` & `__dirname` are passed into it by JavaScript Runtime.
+- `arguments` is an object(array like object) in JavaScript, which contains only `length` & `index` properties. Outside a function, It contains all the details about modules.
+
+```js
+console.log(arguments); // returns an object containing properties:- exports, module, require, __filename, __dirname
+```
+
 - NodeJS has been built **asynchronously**.
 - In NodeJS, Every js file is treated as module (similar to python).
 - `npm` is a CLI tool to manage node packages(third party) & also a repository which contain all the node packages.
@@ -99,6 +104,7 @@
 ### module Module (built-in)
 
 - It gives the information about nodejs core modules
+- It contains a `wrapper` property which returns the **wrapper function** used to wrap a module.
 
 ### superagent Module (third party)
 
@@ -109,13 +115,22 @@
 
 - a third party module to develop node application with easier syntaxes.
 - Automatically figures out `Content-Type` while making request.
-- While making **POST** request for sending data to the server, we have to use **Middleware** (in **express**) to get the payload data.
+- While making **POST** request for sending data to the server, we have to use **Middleware** to get the payload data.
 - `express.json()` **Middleware** parses incoming requests with JSON Payloads and based on `body-parse`.
-- **Middleware** is just a function which modify(process) the data during **REQUEST RESPONSE CYCLE** and it is called so because of being in between `request` and `response`.
+
+#### Middleware
+
+- **Middleware** is just a function which has access to the `request` object, `response` object & next middleware function(**next**) during **REQUEST RESPONSE CYCLE**.
 - Everything in **Express** is **Middleware**, even the route handler functions (callback functions).
 - All the **Middlewares** together are called, **Middleware Stack.**
 - In **Middleware** functions we have access to `next()` function and the last **Middleware** in the **Middleware Stack** is route handler, which does not need `next()`.
 - Request and Response objects go through each and every **Middleware** in the **Middleware Stack** for processing and the whole process is like a **Pipeline**.
+
+- Middleware functions can perform the following tasks:
+  - Execute any code.
+  - Make changes to the request and the response objects.
+  - End the request-response cycle.
+  - Call the next middleware function in the stack.
 - **Status Code** 201 denotes that something has been created.
 - **Dynamic route** is created using **:(variable name)**. For example - `/api/v1/tours/:id`
 - `request.params`returns an object which contains all the variables used in **dynamic route**.
@@ -131,21 +146,49 @@
 
 ```js
 const tourRouter = express.Router();
-tourRouter.route("/").get(getAllTours);
 app.use("/api/v1/tours", tourRouter);
+
+tourRouter.route("/").get(getAllTours);
 ```
 
 - `express.Router()` is used to separate the **routes** in separate files. It appears like a mini-application inside an application.
-- **PARAM MIDDLEWARE** is the **MIDDLEWARE** which triggers its callbak(Param callback) only for a certain parameter and it is used for the router's route which have the parameter(placeholder).
+- **PARAM MIDDLEWARE** is the **MIDDLEWARE** which triggers its callback(It takes `req`, `res`, `next` & `val` parameters) only for a certain parameter. and it is used for the router's route which have the parameter(placeholder).
 - Param callback functions are local to the router on which they are defined. They are not inherited by **mounted apps or routers**. Hence, param callbacks defined on router will be triggered only by route parameters defined on router routes.
 - We can chain multiple **Middleware** functions with any route.
+
+```js
+const checkProperties = (req, res, next) => {
+  const tour = req.body;
+
+  if (!(tour.place_name && tour.state && tour.country)) {
+    return res.status(404).json({
+      status: "fail",
+      message: "place_name or state or country is missing"
+    });
+  }
+  next();
+};
+
+router
+  .route("/")
+  .get(tourController.getAllTours)
+  .post(checkProperties, tourController.createTour);
+```
+
 - **Static Files** are the files (such as **html, css, images & js files**) which are not directly accessed by **Routes** and we have to use **Built-in Express Middleware** `express.static('<folder name>')` to access them.
 - **node** first looks for the route for the requested url then it goes for folder mentioned in `express.static()` **Middleware** from where **Static Files** are served and then it serves the file if it is in the folder.
+
 - By default **Express** sets the environment as **Development**. To check the environment, we use `app.get('env')`.
 - **Environment Variables** are global variables by used by **node applications** or any other applications (like flask applications etc.) while running.
-- **NodeJS** sets a lot of **Environment Variables** ,which can be accessed using `process.env` and `process.env` comes from **built-in process module**.
+- **NodeJS** sets a lot of **Environment Variables**, which can be accessed using `process.env`. `process.env` comes from **built-in process module**.
 - There is a special variable known as **NODE_ENV**, which is used by many packages in **Express** but **Express** does not define this variable, So you have to set it manually.
 - **Environment Variables** for an app (node/flask/django) are set in `.env` or `config.env` file and they are accessed using a third party **dotenv**.
+- **Environment Variables** can be printed in CLI using `printenv` or `env` command.
+- We can set the application environment in linux
+
+```bash
+> NODE_ENV=production nodemon server.js 
+```
 
 ### morgan Module (3rd Party)
 
