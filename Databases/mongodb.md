@@ -46,3 +46,6 @@
 - MongoDB's query mechanism doesn't allow to group or transform the returned data. We have _aggregation operations_ for performing such actions(grouping data, sorting data into a specific order, restructuring returned data etc). These operations can be accessed via _aggregation pipelines_(A series of operations that process data documents sequentially).
 
 - To create aggregation pipeline `aggregate()` method is used.
+- We can repeat stages in aggregate pipeline.
+
+> In Mongoose, a virtual is a property that is not stored in MongoDB. Virtuals are typically used for computed properties on documents.
